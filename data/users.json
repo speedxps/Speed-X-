@@ -4,13 +4,22 @@
     "phone": "0599999999",
     "password": "noor123",
     "email": "noor@example.com",
-    "location": "نابلس"
+    "location": "نابلس",
+    "bills": [
+      { "month": "يونيو 2025", "amount": "90 شيكل", "status": "مدفوعة" },
+      { "month": "مايو 2025", "amount": "90 شيكل", "status": "غير مدفوعة" },
+      { "month": "أبريل 2025", "amount": "90 شيكل", "status": "مدفوعة" }
+    ]
   },
   {
     "username": "mohammed",
     "phone": "0566666666",
     "password": "m123456",
     "email": "mohammed@example.com",
-    "location": "رام الله"
+    "location": "رام الله",
+    "bills": [
+      { "month": "يونيو 2025", "amount": "85 شيكل", "status": "مدفوعة" },
+      { "month": "مايو 2025", "amount": "85 شيكل", "status": "مدفوعة" }
+    ]
   }
 ]
