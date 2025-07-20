@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>الفواتير - Speed X</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="css/style.css" />
@@ -9,6 +9,9 @@
 <body>
   <div class="container bills">
     <h2>💳 فواتيرك الشهرية</h2>
+
+    <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
+
     <table>
       <thead>
         <tr>
@@ -17,31 +20,66 @@
           <th>الحالة</th>
         </tr>
       </thead>
-      <tbody id="billsTableBody">
-        <!-- البيانات ستُضاف هنا -->
-      </tbody>
+      <tbody id="billsTableBody"></tbody>
     </table>
   </div>
 
   <script>
+    // جلب اسم المستخدم من localStorage أو تعيين "guest" كافتراضي
     const user = localStorage.getItem("loggedInUser") || "guest";
 
-    const sampleBills = [
-      { month: "يونيو 2025", amount: "90 شيكل", status: "مدفوعة" },
-      { month: "مايو 2025", amount: "90 شيكل", status: "غير مدفوعة" },
-      { month: "أبريل 2025", amount: "90 شيكل", status: "مدفوعة" }
-    ];
-<button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
-    const tbody = document.getElementById("billsTableBody");
-    sampleBills.forEach(bill => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${bill.month}</td>
-        <td>${bill.amount}</td>
-        <td>${bill.status}</td>
-      `;
-      tbody.appendChild(row);
-    });
+    fetch('data/users.json')
+      .then(response => {
+        if (!response.ok) throw new Error('تعذر تحميل ملف البيانات');
+        return response.json();
+      })
+      .then(usersData => {
+        // ابحث عن المستخدم الحالي حسب اسم المستخدم (تأكد من مطابقة اسم المفتاح في JSON)
+        const currentUser = usersData.find(u => u.username === user);
+
+        if (!currentUser) {
+          alert("المستخدم غير موجود");
+          return;
+        }
+
+        // فرضاً الفواتير داخل currentUser.bills (عدل حسب هيكل JSON)
+        const bills = currentUser.bills || [];
+
+        const tbody = document.getElementById("billsTableBody");
+        bills.forEach(bill => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${bill.month}</td>
+            <td>${bill.amount}</td>
+            <td>${bill.status}</td>
+          `;
+          tbody.appendChild(row);
+        });
+
+        window.printLastBill = function() {
+          if (bills.length === 0) {
+            alert("لا توجد فواتير للطباعة");
+            return;
+          }
+          const lastBill = bills[0];
+          const printContent = `
+            <h2>فاتورتي الأخيرة</h2>
+            <p>📅 الشهر: ${lastBill.month}</p>
+            <p>💳 القيمة: ${lastBill.amount}</p>
+            <p>✅ الحالة: ${lastBill.status}</p>
+          `;
+          const printWindow = window.open('', '', 'height=600,width=800');
+          printWindow.document.write('<html><head><title>طباعة فاتورتي</title></head><body>');
+          printWindow.document.write(printContent);
+          printWindow.document.write('</body></html>');
+          printWindow.document.close();
+          printWindow.print();
+        };
+      })
+      .catch(error => {
+        console.error("خطأ في تحميل البيانات:", error);
+        alert("تعذر تحميل بيانات الفواتير");
+      });
   </script>
 </body>
 </html>
