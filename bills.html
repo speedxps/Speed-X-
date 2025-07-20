@@ -2,39 +2,44 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>الفواتير - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💳 فواتيري - Speed X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h2>💳 فواتيري</h2>
-  <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
-  <table border="1" id="billsTable">
-    <thead>
-      <tr><th>الشهر</th><th>القيمة</th><th>الحالة</th></tr>
-    </thead>
-    <tbody id="billsTableBody"></tbody>
-  </table>
+  <div class="container bills">
+    <h2>💳 فواتيرك الشهرية</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>📅 الشهر</th>
+          <th>💵 القيمة</th>
+          <th>✅ الحالة</th>
+        </tr>
+      </thead>
+      <tbody id="billsTableBody">
+        <!-- الفواتير ستظهر هنا -->
+      </tbody>
+    </table>
+    <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
+  </div>
 
   <script>
-    // هذا المتغير يخزن اسم المستخدم الذي تم تسجيل دخوله (مفترض مخزن في localStorage)
-    const user = localStorage.getItem("loggedInUser") || "guest";
+    const username = localStorage.getItem("loggedInUser");
 
-    // هنا نحمل بيانات المستخدمين من ملف users.json الموجود في مجلد data
-    fetch('data/users.json')
+    fetch("data/users.json")
       .then(response => response.json())
-      .then(usersData => {
-        const currentUser = usersData.find(u => u.username === user);
-
-        if (!currentUser) {
-          alert("المستخدم غير موجود");
+      .then(users => {
+        const user = users.find(u => u.username === username);
+        if (!user) {
+          alert("⚠️ المستخدم غير موجود!");
+          window.location.href = "index.html";
           return;
         }
 
-        const bills = currentUser.bills || [];
+        const bills = user.bills || [];
         const tbody = document.getElementById("billsTableBody");
 
-        // نعرض كل فاتورة في جدول
         bills.forEach(bill => {
           const row = document.createElement("tr");
           row.innerHTML = `
@@ -44,32 +49,38 @@
           `;
           tbody.appendChild(row);
         });
+      })
+      .catch(err => {
+        console.error("فشل تحميل البيانات:", err);
+        alert("🚨 حدث خطأ أثناء تحميل الفواتير.");
+      });
 
-        // دالة طباعة آخر فاتورة
-        window.printLastBill = function() {
-          if (bills.length === 0) {
-            alert("لا توجد فواتير للطباعة");
+    function printLastBill() {
+      const username = localStorage.getItem("loggedInUser");
+      fetch("data/users.json")
+        .then(response => response.json())
+        .then(users => {
+          const user = users.find(u => u.username === username);
+          if (!user || !user.bills || user.bills.length === 0) {
+            alert("⚠️ لا توجد فواتير للطباعة.");
             return;
           }
-          const lastBill = bills[0];
+
+          const lastBill = user.bills[0]; // أحدث فاتورة
           const printContent = `
             <h2>فاتورتي الأخيرة</h2>
             <p>📅 الشهر: ${lastBill.month}</p>
             <p>💳 القيمة: ${lastBill.amount}</p>
             <p>✅ الحالة: ${lastBill.status}</p>
           `;
-          const printWindow = window.open('', '', 'height=600,width=800');
-          printWindow.document.write('<html><head><title>طباعة فاتورتي</title></head><body>');
+          const printWindow = window.open("", "", "height=600,width=800");
+          printWindow.document.write("<html><head><title>🖨️ فاتورتي</title></head><body>");
           printWindow.document.write(printContent);
-          printWindow.document.write('</body></html>');
+          printWindow.document.write("</body></html>");
           printWindow.document.close();
           printWindow.print();
-        };
-      })
-      .catch(error => {
-        console.error("خطأ في تحميل البيانات:", error);
-        alert("تعذر تحميل بيانات الفواتير");
-      });
+        });
+    }
   </script>
 </body>
 </html>
