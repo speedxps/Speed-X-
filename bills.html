@@ -7,34 +7,23 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="container bills">
-    <h2>💳 فواتيرك الشهرية</h2>
-
-    <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
-
-    <table>
-      <thead>
-        <tr>
-          <th>الشهر</th>
-          <th>القيمة</th>
-          <th>الحالة</th>
-        </tr>
-      </thead>
-      <tbody id="billsTableBody"></tbody>
-    </table>
-  </div>
+  <h2>💳 فواتيري</h2>
+  <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
+  <table border="1" id="billsTable">
+    <thead>
+      <tr><th>الشهر</th><th>القيمة</th><th>الحالة</th></tr>
+    </thead>
+    <tbody id="billsTableBody"></tbody>
+  </table>
 
   <script>
-    // جلب اسم المستخدم من localStorage أو تعيين "guest" كافتراضي
+    // هذا المتغير يخزن اسم المستخدم الذي تم تسجيل دخوله (مفترض مخزن في localStorage)
     const user = localStorage.getItem("loggedInUser") || "guest";
 
+    // هنا نحمل بيانات المستخدمين من ملف users.json الموجود في مجلد data
     fetch('data/users.json')
-      .then(response => {
-        if (!response.ok) throw new Error('تعذر تحميل ملف البيانات');
-        return response.json();
-      })
+      .then(response => response.json())
       .then(usersData => {
-        // ابحث عن المستخدم الحالي حسب اسم المستخدم (تأكد من مطابقة اسم المفتاح في JSON)
         const currentUser = usersData.find(u => u.username === user);
 
         if (!currentUser) {
@@ -42,10 +31,10 @@
           return;
         }
 
-        // فرضاً الفواتير داخل currentUser.bills (عدل حسب هيكل JSON)
         const bills = currentUser.bills || [];
-
         const tbody = document.getElementById("billsTableBody");
+
+        // نعرض كل فاتورة في جدول
         bills.forEach(bill => {
           const row = document.createElement("tr");
           row.innerHTML = `
@@ -56,6 +45,7 @@
           tbody.appendChild(row);
         });
 
+        // دالة طباعة آخر فاتورة
         window.printLastBill = function() {
           if (bills.length === 0) {
             alert("لا توجد فواتير للطباعة");
