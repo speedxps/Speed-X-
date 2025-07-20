@@ -188,3 +188,10 @@ button.small:hover {
 .admin-buttons button:hover {
   background-color: #1976D2;
 }
+.admin-buttons button, .bills button {
+  background-color: #FF9800;
+}
+
+.admin-buttons button:hover, .bills button:hover {
+  background-color: #FB8C00;
+}
