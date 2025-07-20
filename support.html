@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الدعم الفني</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    const user = localStorage.getItem("loggedInUser");
+    if (!user) {
+      window.location.href = "login.html";
+    } else {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("welcome-name").innerText = user;
+      });
+    }
+  </script>
+</head>
+<body class="dashboard-body">
+
+  <header class="main-header">
+    <h1>الدعم الفني - Speed X</h1>
+  </header>
+
+  <main class="main-content">
+    <h2>مرحبًا، <span id="welcome-name"></span></h2>
+
+    <section class="support-info">
+      <h3>معلومات التواصل</h3>
+      <ul>
+        <li>📞 الرقم: 1800-123-456</li>
+        <li>📧 البريد الإلكتروني: support@speedx.ps</li>
+        <li>⏰ ساعات العمل: 8:00 صباحًا - 8:00 مساءً</li>
+      </ul>
+    </section>
+
+    <section class="support-form-section">
+      <h3>إرسال شكوى أو استفسار</h3>
+      <form id="support-form">
+        <label for="subject">الموضوع:</label>
+        <input type="text" id="subject" required>
+
+        <label for="message">الرسالة:</label>
+        <textarea id="message" rows="5" required></textarea>
+
+        <button type="submit" class="edit-btn">إرسال</button>
+      </form>
+      <p id="response-msg" style="color: green;"></p>
+    </section>
+
+    <button id="logout-btn" class="edit-btn">تسجيل الخروج</button>
+  </main>
+
+  <script>
+    document.getElementById("support-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("response-msg").innerText = "✅ تم إرسال رسالتك بنجاح. سنقوم بالرد قريبًا.";
+      this.reset();
+    });
+  </script>
+  <script src="js/logout.js"></script>
+</body>
+</html>

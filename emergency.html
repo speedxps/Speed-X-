@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الطوارئ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    const user = localStorage.getItem("loggedInUser");
+    if (!user) {
+      window.location.href = "login.html";
+    } else {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("welcome-name").innerText = user;
+      });
+    }
+  </script>
+</head>
+<body class="dashboard-body">
+
+  <header class="main-header">
+    <h1>نظام الطوارئ - Speed X</h1>
+  </header>
+
+  <main class="main-content">
+    <h2>مرحبًا، <span id="welcome-name"></span></h2>
+
+    <section class="emergency-section">
+      <h3>الحالات الطارئة</h3>
+      <ul id="emergency-list" class="notification-list">
+        <!-- عناصر الطوارئ ستظهر هنا -->
+      </ul>
+    </section>
+
+    <button id="logout-btn" class="edit-btn">تسجيل الخروج</button>
+  </main>
+
+  <script src="js/emergency.js"></script>
+  <script src="js/logout.js"></script>
+</body>
+</html>

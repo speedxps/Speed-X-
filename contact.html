@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تواصل معنا - Speed X</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container contact">
+    <h2>📩 تواصل معنا</h2>
+    <form id="contactForm" class="contact-form">
+      <label for="name">الاسم:</label>
+      <input type="text" id="name" placeholder="اسمك الكامل" required />
+
+      <label for="email">البريد الإلكتروني:</label>
+      <input type="email" id="email" placeholder="example@email.com" required />
+
+      <label for="message">الرسالة:</label>
+      <textarea id="message" rows="5" placeholder="اكتب رسالتك هنا..." required></textarea>
+
+      <button type="submit">إرسال</button>
+    </form>
+    <p id="contactSuccess" style="color: green; display: none; margin-top: 10px;">
+      ✅ تم إرسال رسالتك بنجاح!
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
+
+      const contactMessage = {
+        name,
+        email,
+        message,
+        date: new Date().toLocaleString("ar-EG")
+      };
+
+      // حفظ الرسالة في localStorage كمحاكاة
+      const messages = JSON.parse(localStorage.getItem("contactMessages")) || [];
+      messages.push(contactMessage);
+      localStorage.setItem("contactMessages", JSON.stringify(messages));
+
+      // إظهار رسالة نجاح
+      document.getElementById("contactSuccess").style.display = "block";
+
+      // إعادة تعيين النموذج
+      document.getElementById("contactForm").reset();
+    });
+  </script>
+</body>
+</html>

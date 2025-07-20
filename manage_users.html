@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>إدارة المستخدمين - Speed X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container manage-users">
+    <h2>👥 إدارة المستخدمين</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>رقم الجوال</th>
+          <th>نوع المستخدم</th>
+          <th>إجراء</th>
+        </tr>
+      </thead>
+      <tbody id="usersTableBody">
+        <!-- المستخدمون هنا -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const users = [
+      { username: "0599999999", role: "مشترك" },
+      { username: "0588888888", role: "مشترك" },
+      { username: "admin", role: "مدير" }
+    ];
+
+    const table = document.getElementById("usersTableBody");
+
+    function renderUsers() {
+      table.innerHTML = "";
+      users.forEach((user, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${user.username}</td>
+          <td>${user.role}</td>
+          <td><button onclick="deleteUser(${index})">حذف</button></td>
+        `;
+        table.appendChild(row);
+      });
+    }
+
+    function deleteUser(index) {
+      if (confirm("هل أنت متأكد من حذف المستخدم؟")) {
+        users.splice(index, 1);
+        renderUsers();
+      }
+    }
+
+    renderUsers();
+  </script>
+</body>
+</html>

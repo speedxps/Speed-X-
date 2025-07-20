@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>إرسال إشعار - Speed X</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container send-notification">
+    <h2>إرسال إشعار</h2>
+    <form id="notifyForm" class="notify-form">
+      <label for="receiver">المستلم:</label>
+      <input type="text" id="receiver" placeholder="رقم جوال المستلم" required />
+
+      <label for="title">العنوان:</label>
+      <input type="text" id="title" placeholder="عنوان الإشعار" required />
+
+      <label for="message">الرسالة:</label>
+      <textarea id="message" rows="5" placeholder="اكتب الرسالة هنا..." required></textarea>
+
+      <button type="submit">إرسال</button>
+    </form>
+    <p id="successMsg" style="color: green; display: none; margin-top: 10px;">
+      ✅ تم إرسال الإشعار بنجاح!
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("notifyForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const receiver = document.getElementById("receiver").value;
+      const title = document.getElementById("title").value;
+      const message = document.getElementById("message").value;
+
+      const newNotification = {
+        receiver,
+        title,
+        message,
+        date: new Date().toLocaleString("ar-EG")
+      };
+
+      // محاكاة حفظ البيانات في localStorage
+      const notifications = JSON.parse(localStorage.getItem("notifications")) || [];
+      notifications.push(newNotification);
+      localStorage.setItem("notifications", JSON.stringify(notifications));
+
+      // إظهار رسالة نجاح
+      document.getElementById("successMsg").style.display = "block";
+
+      // إعادة تعيين النموذج
+      document.getElementById("notifyForm").reset();
+    });
+  </script>
+</body>
+</html>

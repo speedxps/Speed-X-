@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الباقات - Speed X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    const user = localStorage.getItem("loggedInUser");
+    if (!user) {
+      window.location.href = "login.html";
+    } else {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("welcome-name").innerText = user;
+      });
+    }
+  </script>
+</head>
+<body class="dashboard-body">
+
+  <header class="main-header">
+    <h1>الباقات المتوفرة - Speed X</h1>
+  </header>
+
+  <main class="main-content">
+    <h2>مرحبًا، <span id="welcome-name"></span></h2>
+
+    <section class="plans-section">
+      <div class="plan-card">
+        <h3>باقة 30 ميجابت</h3>
+        <p>السرعة: 30 Mbps</p>
+        <p>السعر: 70 شيكل / شهر</p>
+        <ul>
+          <li>مناسبة للاستخدام العادي</li>
+          <li>دعم فني على مدار الساعة</li>
+        </ul>
+        <button class="edit-btn">طلب الباقة</button>
+      </div>
+
+      <div class="plan-card">
+        <h3>باقة 60 ميجابت</h3>
+        <p>السرعة: 60 Mbps</p>
+        <p>السعر: 100 شيكل / شهر</p>
+        <ul>
+          <li>مناسبة للعائلات والمشاهدة بدقة HD</li>
+          <li>دعم فني على مدار الساعة</li>
+        </ul>
+        <button class="edit-btn">طلب الباقة</button>
+      </div>
+
+      <div class="plan-card">
+        <h3>باقة 100 ميجابت</h3>
+        <p>السرعة: 100 Mbps</p>
+        <p>السعر: 140 شيكل / شهر</p>
+        <ul>
+          <li>مناسبة للبث والألعاب والعمل عن بعد</li>
+          <li>دعم فني مخصص</li>
+        </ul>
+        <button class="edit-btn">طلب الباقة</button>
+      </div>
+    </section>
+
+    <button id="logout-btn" class="edit-btn">تسجيل الخروج</button>
+  </main>
+
+  <script src="js/logout.js"></script>
+</body>
+</html>

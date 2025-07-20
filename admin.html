@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة تحكم الأدمن - Speed X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin-body">
+  <header class="header">
+    <img src="images/logo.png" alt="Logo" class="logo">
+    <h2>👑 لوحة تحكم الأدمن</h2>
+    <button onclick="logout()">🚪 تسجيل الخروج</button>
+  </header>
+
+  <main class="admin-dashboard">
+    <h3>⚙️ إدارة الموقع</h3>
+    <div class="admin-buttons">
+      <button onclick="manageUsers()">👥 إدارة المشتركين</button>
+      <button onclick="sendNotification()">🔔 إرسال إشعار</button>
+      <button onclick="manageBills()">💳 إدارة الفواتير</button>
+      <button onclick="generateReport()">📊 توليد تقرير</button>
+      <button onclick="exportData()">📂 تحميل البيانات</button>
+      <button onclick="printPage()">🖨️ طباعة</button>
+      <button onclick="changePassword()">🔑 تغيير كلمة المرور</button>
+    </div>
+  </main>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+
+    function manageUsers() {
+      window.location.href = "manage_users.html";
+    }
+
+    function sendNotification() {
+      window.location.href = "send_notification.html";
+    }
+
+    function manageBills() {
+      window.location.href = "bills.html";
+    }
+
+    function generateReport() {
+      alert("📊 سيتم توليد تقرير شامل لاحقًا!");
+    }
+
+    function exportData() {
+      alert("📂 سيتم تحميل جميع بيانات الموقع كـ JSON.");
+    }
+
+    function printPage() {
+      window.print();
+    }
+
+    function changePassword() {
+      alert("🔑 سيتم تفعيل تغيير كلمة المرور في التحديث القادم.");
+    }
+  </script>
+</body>
+</html>
