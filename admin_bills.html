@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>إدارة الفواتير - Speed X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin-body">
+  <header class="header">
+    <h2>💳 إدارة الفواتير</h2>
+    <button onclick="goBack()">🔙 رجوع</button>
+  </header>
+
+  <main class="admin-bills">
+    <table>
+      <thead>
+        <tr>
+          <th>المشترك</th>
+          <th>الشهر</th>
+          <th>القيمة</th>
+          <th>الحالة</th>
+          <th>إجراء</th>
+        </tr>
+      </thead>
+      <tbody id="billsTable">
+        <!-- الفواتير ستظهر هنا -->
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    const bills = [
+      { user: "noor", month: "يونيو 2025", amount: "90 شيكل", status: "مدفوعة" },
+      { user: "mohammed", month: "مايو 2025", amount: "90 شيكل", status: "غير مدفوعة" },
+      { user: "noor", month: "أبريل 2025", amount: "90 شيكل", status: "مدفوعة" }
+    ];
+
+    const table = document.getElementById("billsTable");
+
+    bills.forEach(bill => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${bill.user}</td>
+        <td>${bill.month}</td>
+        <td>${bill.amount}</td>
+        <td>${bill.status}</td>
+        <td><button onclick="printBill('${bill.user}', '${bill.month}', '${bill.amount}', '${bill.status}')">🖨️ طباعة</button></td>
+      `;
+      table.appendChild(row);
+    });
+
+    function printBill(user, month, amount, status) {
+      const printContent = `
+        <h2>فاتورة المشترك: ${user}</h2>
+        <p>📅 الشهر: ${month}</p>
+        <p>💳 القيمة: ${amount}</p>
+        <p>✅ الحالة: ${status}</p>
+      `;
+      const printWindow = window.open('', '', 'height=600,width=800');
+      printWindow.document.write('<html><head><title>طباعة الفاتورة</title></head><body>');
+      printWindow.document.write(printContent);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.print();
+    }
+
+    function goBack() {
+      window.location.href = "admin.html";
+    }
+  </script>
+</body>
+</html>
