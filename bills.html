@@ -1,69 +1,35 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <title>💳 فواتيري - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
-  <div class="container bills">
-    <h2>💳 فواتيرك الشهرية</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>📅 الشهر</th>
-          <th>💵 القيمة</th>
-          <th>✅ الحالة</th>
-        </tr>
-      </thead>
-      <tbody id="billsTableBody">
-        <!-- الفواتير ستظهر هنا -->
-      </tbody>
-    </table>
-    <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
-  </div>
+function printLastBill() {
+  if (!userData || !userData.bills || userData.bills.length === 0) {
+    alert("⚠️ لا توجد فواتير للطباعة.");
+    return;
+  }
 
-  <script>
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    if (!userData) {
-      alert("⚠️ لم يتم العثور على بيانات المستخدم!");
-      window.location.href = "index.html";
-    } else {
-      const bills = userData.bills || [];
-      const tbody = document.getElementById("billsTableBody");
+  const lastBill = userData.bills[0];
+  const printContent = `
+    <html lang="ar" dir="rtl">
+    <head>
+      <meta charset="UTF-8">
+      <title>🖨️ فاتورتي</title>
+      <style>
+        body { font-family: Arial, sans-serif; direction: rtl; text-align: right; padding: 20px; }
+        h2 { color: #009688; }
+        p { font-size: 18px; margin: 10px 0; }
+      </style>
+    </head>
+    <body>
+      <h2>فاتورتي الأخيرة</h2>
+      <p>📅 الشهر: ${lastBill.month}</p>
+      <p>💳 القيمة: ${lastBill.amount}</p>
+      <p>✅ الحالة: ${lastBill.status}</p>
+    </body>
+    </html>
+  `;
 
-      bills.forEach(bill => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${bill.month}</td>
-          <td>${bill.amount}</td>
-          <td>${bill.status}</td>
-        `;
-        tbody.appendChild(row);
-      });
-    }
-
-    function printLastBill() {
-      if (!userData || !userData.bills || userData.bills.length === 0) {
-        alert("⚠️ لا توجد فواتير للطباعة.");
-        return;
-      }
-
-      const lastBill = userData.bills[0]; // أحدث فاتورة
-      const printContent = `
-        <h2>فاتورتي الأخيرة</h2>
-        <p>📅 الشهر: ${lastBill.month}</p>
-        <p>💳 القيمة: ${lastBill.amount}</p>
-        <p>✅ الحالة: ${lastBill.status}</p>
-      `;
-      const printWindow = window.open("", "", "height=600,width=800");
-      printWindow.document.write("<html><head><title>🖨️ فاتورتي</title></head><body>");
-      printWindow.document.write(printContent);
-      printWindow.document.write("</body></html>");
-      printWindow.document.close();
-      printWindow.print();
-    }
-  </script>
-</body>
-</html>
+  const blob = new Blob([printContent], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const printWindow = window.open(url, '_blank');
+  printWindow.onload = function () {
+    printWindow.print();
+    URL.revokeObjectURL(url);
+  };
+}
