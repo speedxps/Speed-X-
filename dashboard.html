@@ -2,34 +2,40 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>🏠 لوحة التحكم - Speed X</title>
+  <title>لوحة التحكم - Speed X 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="dashboard-body">
   <header class="header">
     <img src="images/logo.png" alt="Logo" class="logo">
-    <h2>👋 أهلاً بك، <span id="welcome-name">...</span></h2>
+    <h2>مرحبًا، <span id="welcome-name">...</span></h2>
     <button onclick="logout()">🚪 تسجيل الخروج</button>
   </header>
 
   <main class="dashboard-main">
     <div class="card" onclick="goTo('profile.html')">👤 الملف الشخصي</div>
-    <div class="card" onclick="goTo('bills.html')">💳 الفواتير</div>
+    <div class="card" onclick="goTo('bills.html')">💳 فواتيري</div>
     <div class="card" onclick="goTo('support.html')">📞 الدعم الفني</div>
-    <div class="card" onclick="alert('📢 طلبك تم إرساله بنجاح')">📶 طلب رفع سرعة</div>
-    <div class="card" onclick="alert('📢 تم تسجيل بلاغ العطل')">🛠️ إبلاغ عن عطل</div>
-    <div class="card" onclick="alert('📢 تم إرسال طلب النقل')">🚚 طلب نقل موقع</div>
-    <div class="card" onclick="alert('📦 طلبك للراوتر الجديد قيد المراجعة')">📦 طلب راوتر جديد</div>
-    <div class="card" onclick="window.location.href='tel:0599123456'">📞 اتصل بالدعم</div>
+    <div class="card" onclick="goTo('notifications.html')">🔔 الإشعارات</div>
+    <div class="card" onclick="goTo('upgrade.html')">🚀 ترقية السرعة</div>
+    <div class="card" onclick="goTo('relocation.html')">📦 طلب نقل موقع</div>
+    <div class="card" onclick="goTo('router.html')">📡 شراء راوتر</div>
+    <div class="card" onclick="callSupport()">📞 اتصل بالدعم</div>
   </main>
 
+  <footer class="bottom-nav">
+    <button class="nav-btn" onclick="goTo('profile.html')">👤 الملف الشخصي</button>
+    <button class="nav-btn" onclick="goTo('bills.html')">💳 فواتيري</button>
+    <button class="nav-btn" onclick="goTo('support.html')">📞 الدعم</button>
+  </footer>
+
   <script>
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    if (!userData) {
-      window.location.href = "index.html"; // رجوع لتسجيل الدخول
+    const user = localStorage.getItem("loggedInUser");
+    if (!user) {
+      window.location.href = "index.html"; // رجوع لصفحة تسجيل الدخول
     } else {
-      document.getElementById("welcome-name").innerText = userData.username;
+      document.getElementById("welcome-name").innerText = user;
     }
 
     function goTo(page) {
@@ -38,8 +44,11 @@
 
     function logout() {
       localStorage.removeItem("loggedInUser");
-      localStorage.removeItem("userData");
       window.location.href = "index.html";
+    }
+
+    function callSupport() {
+      window.location.href = "tel:0599123456";
     }
   </script>
 </body>
