@@ -1,130 +1,46 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>الملف الشخصي - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    .profile-avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #ff9800;
-      margin-bottom: 15px;
-    }
-    .profile-section {
-      max-width: 400px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .profile-section h3 {
-      margin-bottom: 10px;
-      color: #ff9800;
-      font-size: 24px;
-    }
-    .profile-section p {
-      font-size: 18px;
-      margin: 6px 0;
-      color: #555;
-    }
-    .edit-btn {
-      background-color: #ff9800;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 15px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-    .edit-btn:hover {
-      background-color: #fb8c00;
-    }
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #ff9800;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-    }
-    .nav-btn {
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .nav-btn:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="dashboard-body">
-
   <header class="main-header">
-    <h2>الملف الشخصي</h2>
+    <h2>👤 الملف الشخصي</h2>
   </header>
 
-  <main>
+  <main class="main-content">
     <section class="profile-section">
-      <img src="images/avatar.png" alt="User Avatar" class="profile-avatar" id="userAvatar">
-      <h3 id="userName">...</h3>
-      <p><strong>رقم الهاتف:</strong> <span id="userPhone">...</span></p>
-      <p><strong>البريد الإلكتروني:</strong> <span id="userEmail">...</span></p>
-      <p><strong>الموقع:</strong> <span id="userLocation">...</span></p>
-      <p><strong>نوع الاشتراك:</strong> <span id="userPlan">...</span></p>
-      <button class="edit-btn" onclick="editProfile()">تعديل المعلومات</button>
+      <img id="avatar" src="images/avatar.png" alt="User Avatar" class="profile-avatar">
+      <h3 id="username">...</h3>
+      <p><strong>📱 رقم الهاتف:</strong> <span id="phone"></span></p>
+      <p><strong>📧 البريد الإلكتروني:</strong> <span id="email"></span></p>
+      <p><strong>📍 الموقع:</strong> <span id="location"></span></p>
+      <p><strong>🚀 نوع الباقة:</strong> <span id="plan">---</span></p>
+      <button class="edit-btn">✏️ تعديل المعلومات</button>
     </section>
   </main>
 
   <footer class="bottom-nav">
-    <button class="nav-btn" onclick="location.href='dashboard.html'">الرئيسية</button>
-    <button class="nav-btn" onclick="location.href='notifications.html'">الإشعارات</button>
-    <button class="nav-btn" onclick="location.href='more.html'">المزيد</button>
+    <button class="nav-btn" onclick="location.href='dashboard.html'">🏠 الرئيسية</button>
+    <button class="nav-btn" onclick="location.href='bills.html'">💳 الفواتير</button>
+    <button class="nav-btn" onclick="location.href='support.html'">📞 الدعم</button>
   </footer>
 
   <script>
-    const username = localStorage.getItem("loggedInUser");
-
-    if (!username) {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) {
+      alert("⚠️ لم يتم العثور على بيانات المستخدم!");
       window.location.href = "index.html";
-    }
-
-    fetch("data/users.json")
-      .then(res => res.json())
-      .then(users => {
-        const user = users.find(u => u.username === username);
-        if (!user) {
-          alert("⚠️ المستخدم غير موجود!");
-          window.location.href = "index.html";
-          return;
-        }
-
-        document.getElementById("userName").innerText = user.username || "...";
-        document.getElementById("userPhone").innerText = user.phone || "...";
-        document.getElementById("userEmail").innerText = user.email || "...";
-        document.getElementById("userLocation").innerText = user.location || "...";
-        document.getElementById("userPlan").innerText = user.plan || "غير محدد";
-
-        // لو عندك صور مختلفة لكل مستخدم، يمكن تعديل هنا:
-        // مثلا: document.getElementById("userAvatar").src = `images/users/${user.username}.png`;
-      })
-      .catch(err => {
-        console.error("فشل تحميل البيانات:", err);
-        alert("🚨 حدث خطأ أثناء تحميل بيانات الملف الشخصي.");
-      });
-
-    function editProfile() {
-      alert("🔧 ميزة تعديل المعلومات قيد التطوير.");
+    } else {
+      document.getElementById("avatar").src = userData.avatar || "images/avatar.png";
+      document.getElementById("username").innerText = userData.username;
+      document.getElementById("phone").innerText = userData.phone;
+      document.getElementById("email").innerText = userData.email;
+      document.getElementById("location").innerText = userData.location;
+      document.getElementById("plan").innerText = userData.plan || "غير محدد";
     }
   </script>
 </body>
