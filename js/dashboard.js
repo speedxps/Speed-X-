@@ -1,30 +1,45 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const usernameSpan = document.getElementById("username");
-  const speedSpan = document.getElementById("speed");
-  const balanceSpan = document.getElementById("balance");
+  const welcomeNameSpan = document.getElementById("welcome-name");
 
-  const userPhone = localStorage.getItem("userPhone");
+  // خزن اسم المستخدم في localStorage تحت هذا المفتاح:
+  const loggedInUser = localStorage.getItem("loggedInUser");
 
-  if (!userPhone) {
-    window.location.href = "index.html"; // لم يتم تسجيل الدخول
+  if (!loggedInUser) {
+    // لم يتم تسجيل الدخول: اعادة توجيه للصفحة الرئيسية (تسجيل الدخول)
+    window.location.href = "index.html";
     return;
   }
 
-  fetch("users.json")
-    .then((res) => res.json())
+  fetch("data/users.json")
+    .then((response) => response.json())
     .then((users) => {
-      const user = users.find((u) => u.phone === userPhone);
+      // البحث عن المستخدم بالاسم
+      const user = users.find((u) => u.username === loggedInUser);
       if (!user) {
         alert("لم يتم العثور على بيانات المستخدم.");
+        localStorage.removeItem("loggedInUser");
+        window.location.href = "index.html";
         return;
       }
 
-      usernameSpan.innerText = user.name || "مستخدم";
-      speedSpan.innerText = user.speed || "غير معروف";
-      balanceSpan.innerText = `${user.balance || 0} ₪`;
+      // عرض اسم المستخدم في الترحيب
+      welcomeNameSpan.textContent = user.username || "مستخدم";
+
+      // يمكنك إضافة هنا تحديث عناصر أخرى في الصفحة حسب الحاجة
     })
     .catch((error) => {
       console.error("خطأ في تحميل بيانات المستخدم:", error);
       alert("حدث خطأ أثناء تحميل البيانات.");
     });
 });
+
+// التنقل بين الصفحات
+function goTo(page) {
+  window.location.href = page;
+}
+
+// تسجيل الخروج
+function logout() {
+  localStorage.removeItem("loggedInUser");
+  window.location.href = "index.html";
+}
