@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body class="dashboard-body">
+<body>
   <div class="container bills">
     <h2>💳 فواتيرك الشهرية</h2>
     <table>
@@ -22,78 +22,47 @@
       </tbody>
     </table>
     <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
-    <button onclick="goBack()" style="margin-top: 15px;">⬅️ العودة للوحة التحكم</button>
   </div>
 
   <script>
-    const username = localStorage.getItem("loggedInUser");
-
-    if (!username) {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) {
+      alert("⚠️ لم يتم العثور على بيانات المستخدم!");
       window.location.href = "index.html";
-    }
+    } else {
+      const bills = userData.bills || [];
+      const tbody = document.getElementById("billsTableBody");
 
-    fetch("data/users.json")
-      .then(response => response.json())
-      .then(users => {
-        const user = users.find(u => u.username === username);
-        if (!user) {
-          alert("⚠️ المستخدم غير موجود!");
-          window.location.href = "index.html";
-          return;
-        }
-
-        const bills = user.bills || [];
-        const tbody = document.getElementById("billsTableBody");
-
-        if (bills.length === 0) {
-          tbody.innerHTML = "<tr><td colspan='3'>لا توجد فواتير متاحة.</td></tr>";
-          return;
-        }
-
-        bills.forEach(bill => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${bill.month}</td>
-            <td>${bill.amount}</td>
-            <td>${bill.status}</td>
-          `;
-          tbody.appendChild(row);
-        });
-      })
-      .catch(err => {
-        console.error("فشل تحميل البيانات:", err);
-        alert("🚨 حدث خطأ أثناء تحميل الفواتير.");
+      bills.forEach(bill => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${bill.month}</td>
+          <td>${bill.amount}</td>
+          <td>${bill.status}</td>
+        `;
+        tbody.appendChild(row);
       });
+    }
 
     function printLastBill() {
-      const username = localStorage.getItem("loggedInUser");
-      fetch("data/users.json")
-        .then(response => response.json())
-        .then(users => {
-          const user = users.find(u => u.username === username);
-          if (!user || !user.bills || user.bills.length === 0) {
-            alert("⚠️ لا توجد فواتير للطباعة.");
-            return;
-          }
+      if (!userData || !userData.bills || userData.bills.length === 0) {
+        alert("⚠️ لا توجد فواتير للطباعة.");
+        return;
+      }
 
-          const lastBill = user.bills[0]; // أحدث فاتورة
-          const printContent = `
-            <h2>فاتورتي الأخيرة</h2>
-            <p>📅 الشهر: ${lastBill.month}</p>
-            <p>💳 القيمة: ${lastBill.amount}</p>
-            <p>✅ الحالة: ${lastBill.status}</p>
-          `;
-          const printWindow = window.open("", "", "height=600,width=800");
-          printWindow.document.write("<html><head><title>🖨️ فاتورتي</title></head><body>");
-          printWindow.document.write(printContent);
-          printWindow.document.write("</body></html>");
-          printWindow.document.close();
-          printWindow.print();
-        });
-    }
-
-    function goBack() {
-      window.location.href = "dashboard.html";
+      const lastBill = userData.bills[0]; // أحدث فاتورة
+      const printContent = `
+        <h2>فاتورتي الأخيرة</h2>
+        <p>📅 الشهر: ${lastBill.month}</p>
+        <p>💳 القيمة: ${lastBill.amount}</p>
+        <p>✅ الحالة: ${lastBill.status}</p>
+      `;
+      const printWindow = window.open("", "", "height=600,width=800");
+      printWindow.document.write("<html><head><title>🖨️ فاتورتي</title></head><body>");
+      printWindow.document.write(printContent);
+      printWindow.document.write("</body></html>");
+      printWindow.document.close();
+      printWindow.print();
     }
   </script>
 </body>
