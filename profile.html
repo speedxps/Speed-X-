@@ -9,38 +9,60 @@
 <body class="dashboard-body">
   <header class="main-header">
     <h2>👤 الملف الشخصي</h2>
+    <button onclick="goBack()" class="back-btn">🔙 رجوع</button>
   </header>
 
   <main class="main-content">
     <section class="profile-section">
-      <img id="avatar" src="images/avatar.png" alt="User Avatar" class="profile-avatar">
-      <h3 id="username">...</h3>
-      <p><strong>📱 رقم الهاتف:</strong> <span id="phone"></span></p>
-      <p><strong>📧 البريد الإلكتروني:</strong> <span id="email"></span></p>
-      <p><strong>📍 الموقع:</strong> <span id="location"></span></p>
-      <p><strong>🚀 نوع الباقة:</strong> <span id="plan">---</span></p>
-      <button class="edit-btn">✏️ تعديل المعلومات</button>
+      <img id="profile-avatar" src="images/avatar.png" alt="User Avatar" class="profile-avatar">
+      <h3 id="profile-name">...</h3>
+      <p><strong>📱 رقم الهاتف:</strong> <span id="profile-phone"></span></p>
+      <p><strong>📧 البريد الإلكتروني:</strong> <span id="profile-email"></span></p>
+      <p><strong>📍 الموقع:</strong> <span id="profile-location"></span></p>
+      <button class="edit-btn" onclick="alert('🛠️ ميزة التعديل قيد التطوير')">✏️ تعديل المعلومات</button>
     </section>
   </main>
 
   <footer class="bottom-nav">
     <button class="nav-btn" onclick="location.href='dashboard.html'">🏠 الرئيسية</button>
-    <button class="nav-btn" onclick="location.href='bills.html'">💳 الفواتير</button>
+    <button class="nav-btn" onclick="location.href='bills.html'">💳 فواتيري</button>
     <button class="nav-btn" onclick="location.href='support.html'">📞 الدعم</button>
   </footer>
 
   <script>
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    if (!userData) {
-      alert("⚠️ لم يتم العثور على بيانات المستخدم!");
-      window.location.href = "index.html";
-    } else {
-      document.getElementById("avatar").src = userData.avatar || "images/avatar.png";
-      document.getElementById("username").innerText = userData.username;
-      document.getElementById("phone").innerText = userData.phone;
-      document.getElementById("email").innerText = userData.email;
-      document.getElementById("location").innerText = userData.location;
-      document.getElementById("plan").innerText = userData.plan || "غير محدد";
+    const username = localStorage.getItem("loggedInUser");
+
+    fetch("data/users.json")
+      .then(res => res.json())
+      .then(users => {
+        const user = users.find(u => u.username === username);
+        if (!user) {
+          alert("⚠️ المستخدم غير موجود.");
+          window.location.href = "index.html";
+          return;
+        }
+
+        document.getElementById("profile-name").innerText = user.username;
+        document.getElementById("profile-phone").innerText = user.phone;
+        document.getElementById("profile-email").innerText = user.email;
+        document.getElementById("profile-location").innerText = user.location;
+
+        // تحميل الصورة حسب اسم المستخدم أو صورة افتراضية
+        const avatarPath = `images/${user.username}.png`;
+        fetch(avatarPath)
+          .then(response => {
+            if (response.ok) {
+              document.getElementById("profile-avatar").src = avatarPath;
+            }
+          });
+      })
+      .catch(err => {
+        console.error("خطأ في تحميل بيانات الملف الشخصي:", err);
+        alert("🚨 حدث خطأ أثناء تحميل البيانات.");
+      });
+
+    function goBack() {
+      window.location.href = "dashboard.html";
     }
   </script>
 </body>
