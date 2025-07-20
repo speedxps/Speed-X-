@@ -19,9 +19,8 @@
       <button onclick="manageUsers()">👥 إدارة المشتركين</button>
       <button onclick="sendNotification()">🔔 إرسال إشعار</button>
       <button onclick="manageBills()">💳 إدارة الفواتير</button>
-      <button onclick="generateReport()">📊 توليد تقرير</button>
+      <button onclick="printReports()">🖨️ طباعة التقارير العامة</button>
       <button onclick="exportData()">📂 تحميل البيانات</button>
-      <button onclick="printPage()">🖨️ طباعة</button>
       <button onclick="changePassword()">🔑 تغيير كلمة المرور</button>
     </div>
   </main>
@@ -41,19 +40,15 @@
     }
 
     function manageBills() {
-      window.location.href = "bills.html";
+      window.location.href = "admin_bills.html";
     }
 
-    function generateReport() {
-      alert("📊 سيتم توليد تقرير شامل لاحقًا!");
+    function printReports() {
+      window.print();
     }
 
     function exportData() {
       alert("📂 سيتم تحميل جميع بيانات الموقع كـ JSON.");
-    }
-
-    function printPage() {
-      window.print();
     }
 
     function changePassword() {
