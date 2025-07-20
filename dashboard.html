@@ -1,86 +1,46 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <title>لوحة التحكم - Speed X 2025</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    body.dashboard-body {
-      font-family: "Cairo", sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    .header {
-      background-color: #ff9800;
-      color: white;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      direction: rtl;
-    }
-    .header .logo {
-      height: 40px;
-    }
-    .dashboard-main {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .card {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 7px rgba(0,0,0,0.1);
-      padding: 20px;
-      cursor: pointer;
-      font-size: 18px;
-      color: #444;
-      transition: background-color 0.3s ease;
-      user-select: none;
-    }
-    .card:hover {
-      background-color: #ffb74d;
-      color: #fff;
-    }
-    button.logout-btn {
-      background: transparent;
-      border: 1px solid white;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-      padding: 6px 14px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-    button.logout-btn:hover {
-      background-color: rgba(255,255,255,0.3);
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>🏠 لوحة التحكم - Speed X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="dashboard-body">
   <header class="header">
-    <img src="images/logo.png" alt="Logo" class="logo" />
-    <h2>أهلاً بك، <span id="welcome-name">...</span>!</h2>
-    <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
+    <img src="images/logo.png" alt="Logo" class="logo">
+    <h2>👋 أهلاً بك، <span id="welcome-name">...</span></h2>
+    <button onclick="logout()">🚪 تسجيل الخروج</button>
   </header>
 
   <main class="dashboard-main">
-    <div class="card" onclick="goTo('profile.html')">الملف الشخصي</div>
-    <div class="card" onclick="goTo('plans.html')">الباقات</div>
-    <div class="card" onclick="goTo('bills.html')">الفواتير</div>
-    <div class="card" onclick="goTo('notifications.html')">الإشعارات</div>
-    <div class="card" onclick="goTo('emergency.html')">الطوارئ</div>
-    <div class="card" onclick="goTo('support.html')">الدعم</div>
-    <div class="card" onclick="goTo('settings.html')">الإعدادات</div>
-    <div class="card" onclick="goTo('more.html')">المزيد</div>
+    <div class="card" onclick="goTo('profile.html')">👤 الملف الشخصي</div>
+    <div class="card" onclick="goTo('bills.html')">💳 الفواتير</div>
+    <div class="card" onclick="goTo('support.html')">📞 الدعم الفني</div>
+    <div class="card" onclick="alert('📢 طلبك تم إرساله بنجاح')">📶 طلب رفع سرعة</div>
+    <div class="card" onclick="alert('📢 تم تسجيل بلاغ العطل')">🛠️ إبلاغ عن عطل</div>
+    <div class="card" onclick="alert('📢 تم إرسال طلب النقل')">🚚 طلب نقل موقع</div>
+    <div class="card" onclick="alert('📦 طلبك للراوتر الجديد قيد المراجعة')">📦 طلب راوتر جديد</div>
+    <div class="card" onclick="window.location.href='tel:0599123456'">📞 اتصل بالدعم</div>
   </main>
 
-  <script src="js/dashboard.js"></script>
+  <script>
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    if (!userData) {
+      window.location.href = "index.html"; // رجوع لتسجيل الدخول
+    } else {
+      document.getElementById("welcome-name").innerText = userData.username;
+    }
+
+    function goTo(page) {
+      window.location.href = page;
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      localStorage.removeItem("userData");
+      window.location.href = "index.html";
+    }
+  </script>
 </body>
 </html>
