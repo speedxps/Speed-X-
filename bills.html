@@ -31,7 +31,7 @@
       { month: "مايو 2025", amount: "90 شيكل", status: "غير مدفوعة" },
       { month: "أبريل 2025", amount: "90 شيكل", status: "مدفوعة" }
     ];
-
+<button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
     const tbody = document.getElementById("billsTableBody");
     sampleBills.forEach(bill => {
       const row = document.createElement("tr");
