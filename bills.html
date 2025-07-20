@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="dashboard-body">
   <div class="container bills">
     <h2>💳 فواتيرك الشهرية</h2>
     <table>
@@ -22,10 +22,15 @@
       </tbody>
     </table>
     <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
+    <button onclick="goBack()" style="margin-top: 15px;">⬅️ العودة للوحة التحكم</button>
   </div>
 
   <script>
     const username = localStorage.getItem("loggedInUser");
+
+    if (!username) {
+      window.location.href = "index.html";
+    }
 
     fetch("data/users.json")
       .then(response => response.json())
@@ -39,6 +44,11 @@
 
         const bills = user.bills || [];
         const tbody = document.getElementById("billsTableBody");
+
+        if (bills.length === 0) {
+          tbody.innerHTML = "<tr><td colspan='3'>لا توجد فواتير متاحة.</td></tr>";
+          return;
+        }
 
         bills.forEach(bill => {
           const row = document.createElement("tr");
@@ -80,6 +90,10 @@
           printWindow.document.close();
           printWindow.print();
         });
+    }
+
+    function goBack() {
+      window.location.href = "dashboard.html";
     }
   </script>
 </body>
