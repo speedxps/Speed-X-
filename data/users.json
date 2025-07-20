@@ -5,8 +5,8 @@
     "password": "noor123",
     "email": "noor@example.com",
     "location": "نابلس",
-    "plan": "باقة 100 ميجا",
-    "avatar": "images/users/noor.png",
+    "avatar": "images/noor.png",
+    "plan": "100 ميجا",
     "bills": [
       { "month": "يونيو 2025", "amount": "90 شيكل", "status": "مدفوعة" },
       { "month": "مايو 2025", "amount": "90 شيكل", "status": "غير مدفوعة" }
@@ -18,19 +18,11 @@
     "password": "m123456",
     "email": "mohammed@example.com",
     "location": "رام الله",
-    "plan": "باقة 60 ميجا",
-    "avatar": "images/users/mohammed.png",
+    "avatar": "images/mohammed.png",
+    "plan": "50 ميجا",
     "bills": [
       { "month": "يونيو 2025", "amount": "120 شيكل", "status": "غير مدفوعة" },
       { "month": "مايو 2025", "amount": "120 شيكل", "status": "مدفوعة" }
     ]
-  },
-  {
-    "username": "admin",
-    "phone": "0500000000",
-    "password": "123",
-    "email": "admin@speedx.ps",
-    "location": "القدس",
-    "role": "admin"
   }
 ]
