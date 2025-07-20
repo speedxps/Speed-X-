@@ -1,0 +1,190 @@
+/* إعدادات عامة */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+}
+
+h2 {
+  color: #4CAF50;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* الحاوية العامة */
+.container {
+  width: 90%;
+  max-width: 500px;
+  margin: 50px auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+/* الشعار */
+.logo {
+  display: block;
+  margin: 0 auto 15px;
+  width: 120px;
+}
+
+/* النماذج */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* الجدول */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* الأزرار الصغيرة */
+button.small {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: #f44336;
+}
+
+button.small:hover {
+  background-color: #d32f2f;
+}
+
+/* الصفحة الرئيسية (dashboard) */
+.dashboard-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #e3f2fd;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background-color: #bbdefb;
+}
+
+.card:active {
+  transform: translateY(0);
+}
+
+/* ملاحظة أسفل النماذج */
+.note {
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+}
+
+/* رسالة النجاح */
+#successMsg, #contactSuccess {
+  text-align: center;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+/* دعم الهواتف */
+@media (max-width: 600px) {
+  .container {
+    margin: 20px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+}
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+  }
+}
+/* صفحة الأدمن */
+.admin-dashboard {
+  text-align: center;
+}
+
+.admin-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.admin-buttons button {
+  background-color: #2196F3;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.admin-buttons button:hover {
+  background-color: #1976D2;
+}
