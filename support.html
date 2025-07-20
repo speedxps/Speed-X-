@@ -1,160 +1,54 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <title>الدعم الفني - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    .dashboard-body {
-      font-family: "Cairo", sans-serif;
-      background: #f7f7f7;
-      padding: 20px;
-    }
-    .main-header h1 {
-      color: #ff9800;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .support-info ul {
-      list-style: none;
-      padding: 0;
-      max-width: 400px;
-      margin: 0 auto 30px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 3px 7px rgba(0,0,0,0.1);
-      padding: 20px;
-      font-size: 18px;
-      color: #555;
-    }
-    .support-info li {
-      margin: 10px 0;
-    }
-    .support-form-section {
-      max-width: 400px;
-      margin: 0 auto;
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 7px rgba(0,0,0,0.1);
-    }
-    label {
-      display: block;
-      margin: 12px 0 6px;
-      font-weight: 600;
-      color: #333;
-    }
-    input[type="text"],
-    textarea {
-      width: 100%;
-      padding: 8px 10px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      resize: vertical;
-      box-sizing: border-box;
-    }
-    button.edit-btn {
-      background-color: #ff9800;
-      border: none;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 15px;
-      width: 100%;
-      font-weight: 700;
-      font-size: 18px;
-      transition: background-color 0.3s ease;
-    }
-    button.edit-btn:hover {
-      background-color: #fb8c00;
-    }
-    #response-msg {
-      margin-top: 12px;
-      font-weight: 600;
-      color: green;
-      text-align: center;
-    }
-    #logout-btn {
-      display: block;
-      margin: 30px auto 0;
-      padding: 10px 25px;
-      border-radius: 8px;
-      border: none;
-      background-color: #ff9800;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      font-weight: 700;
-      max-width: 400px;
-    }
-    #logout-btn:hover {
-      background-color: #fb8c00;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>📞 الدعم الفني - Speed X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="dashboard-body">
-
   <header class="main-header">
-    <h1>الدعم الفني - Speed X</h1>
+    <h2>📞 الدعم الفني</h2>
   </header>
 
   <main class="main-content">
-    <h2>مرحبًا، <span id="welcome-name">...</span></h2>
-
-    <section class="support-info">
-      <h3>معلومات التواصل</h3>
+    <section class="support-section">
+      <h3>مرحبًا، <span id="welcome-name"></span></h3>
+      <p>لأي مشكلة أو استفسار تواصل معنا:</p>
       <ul>
-        <li>📞 الرقم: 0599123456</li>
-        <li>📧 البريد الإلكتروني: support@speedx.ps</li>
-        <li>⏰ ساعات العمل: 8:00 صباحًا - 8:00 مساءً</li>
+        <li>📞 الرقم: <a href="tel:0599123456">0599123456</a></li>
+        <li>📧 البريد: <a href="mailto:support@speedx.ps">support@speedx.ps</a></li>
+        <li>⏰ مواعيد العمل: 8 صباحًا - 8 مساءً</li>
       </ul>
-      <button onclick="callSupport()" style="background:#ff9800; color:#fff; padding:10px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:700; margin-top:10px;">
-        📞 الاتصال بالدعم الآن
-      </button>
-    </section>
 
-    <section class="support-form-section">
-      <h3>إرسال شكوى أو استفسار</h3>
+      <h3>📬 إرسال طلب دعم</h3>
       <form id="support-form">
         <label for="subject">الموضوع:</label>
-        <input type="text" id="subject" required />
+        <input type="text" id="subject" required>
 
         <label for="message">الرسالة:</label>
         <textarea id="message" rows="5" required></textarea>
 
-        <button type="submit" class="edit-btn">إرسال</button>
+        <button type="submit" class="edit-btn">📤 إرسال</button>
       </form>
-      <p id="response-msg"></p>
+      <p id="response-msg" style="color: green;"></p>
     </section>
-
-    <button id="logout-btn">تسجيل الخروج</button>
   </main>
 
+  <footer class="bottom-nav">
+    <button class="nav-btn" onclick="location.href='dashboard.html'">🏠 الرئيسية</button>
+    <button class="nav-btn" onclick="location.href='bills.html'">💳 الفواتير</button>
+  </footer>
+
   <script>
-    const username = localStorage.getItem("loggedInUser");
-    if (!username) {
-      window.location.href = "index.html";
-    } else {
-      document.getElementById("welcome-name").innerText = username;
-    }
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    document.getElementById("welcome-name").innerText = userData ? userData.username : "مستخدم";
 
     document.getElementById("support-form").addEventListener("submit", function(e) {
       e.preventDefault();
-      document.getElementById("response-msg").innerText = "✅ تم إرسال رسالتك بنجاح. سنقوم بالرد قريبًا.";
+      document.getElementById("response-msg").innerText = "✅ تم إرسال الطلب بنجاح. سنرد عليك قريبًا.";
       this.reset();
     });
-
-    document.getElementById("logout-btn").addEventListener("click", () => {
-      localStorage.removeItem("loggedInUser");
-      window.location.href = "index.html";
-    });
-
-    function callSupport() {
-      window.location.href = "tel:0599123456";
-    }
   </script>
 </body>
 </html>
