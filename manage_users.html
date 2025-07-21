@@ -35,11 +35,28 @@
       background-color: #3498db;
       color: white;
     }
+
+    /* تخصيص زر الطباعة الكلي */
+    .print-all {
+      background-color: #27ae60;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 15px 0;
+    }
+
+    .print-all:hover {
+      background-color: #2ecc71;
+    }
   </style>
 </head>
 <body>
   <div class="container manage-users">
     <h2>👥 إدارة المستخدمين</h2>
+    <!-- زر طباعة جميع المشتركين -->
+    <button class="print-all" onclick="printAllUsers()">🖨️ طباعة جميع المشتركين</button>
+
     <table>
       <thead>
         <tr>
@@ -94,6 +111,25 @@
       const price = "0";
 
       const printUrl = `print-user.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&location=${encodeURIComponent(location)}&plan=${encodeURIComponent(plan)}&date=${encodeURIComponent(date)}&price=${encodeURIComponent(price)}`;
+      window.open(printUrl, '_blank');
+    }
+
+    function printAllUsers() {
+      // فتح صفحة الطباعة لجميع المشتركين
+      let printUrl = "print-user.html?allUsers=";
+      const allUsersData = users.map(user => {
+        return {
+          name: "مشترك", // افتراضياً يمكن تعديلها
+          phone: user.username,
+          role: user.role,
+          location: "غير محدد",
+          plan: "غير معروف",
+          date: new Date().toISOString().split('T')[0],
+          price: "0"
+        };
+      });
+
+      printUrl += encodeURIComponent(JSON.stringify(allUsersData));
       window.open(printUrl, '_blank');
     }
 
