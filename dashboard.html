@@ -94,11 +94,13 @@
       justify-content: space-around;
       padding: 10px 0;
       border-top: 1px solid #ddd;
+      z-index: 100;
     }
     .bottom-nav div {
       text-align: center;
       font-size: 12px;
       color: #333;
+      cursor: pointer;
     }
     .bottom-nav .active {
       color: #6bc641;
@@ -167,9 +169,9 @@
 
   <div class="notifications" id="notifications">
     <h4>الإشعارات</h4>
-    <p>📢 إشعار جديد: تم إصدار فاتورة شهر يوليو.</p>
-    <p>⚡ إشعار: هناك قطع كهرباء مجدول غداً من 9 صباحاً.</p>
-    <p>🎁 عرض خاص: احصل على 20% خصم عند تجديد الباقة!</p>
+    <p>📢 تم إصدار فاتورة شهر يوليو.</p>
+    <p>⚡ قطع كهرباء مجدول غداً من 9 صباحاً.</p>
+    <p>🎁 خصم 20% عند تجديد الباقة اليوم!</p>
   </div>
 
   <div class="search-box" id="searchBox">
@@ -226,18 +228,22 @@
       <i class="fas fa-home"></i><br>
       الرئيسية
     </div>
-    <div>
-      <i class="fas fa-th-large"></i><br>
-      الخدمات
-    </div>
-    <div>
+    <a href="services.html">
+      <div>
+        <i class="fas fa-th-large"></i><br>
+        الخدمات
+      </div>
+    </a>
+    <div onclick="alert('🛍️ المتجر قيد التطوير حالياً. تابعنا لاحقاً!')">
       <i class="fas fa-store"></i><br>
       المتجر
     </div>
-    <div>
-      <i class="fas fa-cog"></i><br>
-      المزيد
-    </div>
+    <a href="settings.html">
+      <div>
+        <i class="fas fa-cog"></i><br>
+        المزيد
+      </div>
+    </a>
   </div>
 
   <script>
