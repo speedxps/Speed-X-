@@ -5,8 +5,85 @@
   <title>إدارة الفواتير - Speed X</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #6bc641;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button.print {
+      background-color: #3498db;
+      color: white;
+    }
+
+    button.print:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    button.print:active {
+      transform: translateY(1px);
+    }
+
+    /* تخصيص زر الطباعة الكلي */
+    .print-all {
+      background-color: #27ae60;
+      color: white;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 15px 0;
+    }
+
+    .print-all:hover {
+      background-color: #2ecc71;
+    }
+
+    .print-all:active {
+      transform: translateY(1px);
+    }
+
+    /* تخصيص الجدول */
+    th {
+      background-color: #2ecc71;
+      color: white;
+    }
+  </style>
 </head>
-<body class="admin-body">
+<body>
   <header class="header">
     <h2>💳 إدارة الفواتير</h2>
     <button onclick="goBack()">🔙 رجوع</button>
@@ -45,20 +122,20 @@
         <td>${bill.month}</td>
         <td>${bill.amount}</td>
         <td>${bill.status}</td>
-        <td><button onclick="printBill('${bill.user}', '${bill.month}', '${bill.amount}', '${bill.status}')">🖨️ طباعة</button></td>
+        <td><button class="print" onclick="printBill('${bill.user}', '${bill.month}', '${bill.amount}', '${bill.status}')">🖨️ طباعة</button></td>
       `;
       table.appendChild(row);
     });
 
     function printBill(user, month, amount, status) {
       const printContent = `
-        <h2>فاتورة المشترك: ${user}</h2>
-        <p>📅 الشهر: ${month}</p>
-        <p>💳 القيمة: ${amount}</p>
-        <p>✅ الحالة: ${status}</p>
+        <h2>Invoice for User: ${user}</h2>
+        <p>📅 Month: ${month}</p>
+        <p>💳 Amount: ${amount}</p>
+        <p>✅ Status: ${status}</p>
       `;
       const printWindow = window.open('', '', 'height=600,width=800');
-      printWindow.document.write('<html><head><title>طباعة الفاتورة</title></head><body>');
+      printWindow.document.write('<html><head><title>Invoice Print</title></head><body>');
       printWindow.document.write(printContent);
       printWindow.document.write('</body></html>');
       printWindow.document.close();
