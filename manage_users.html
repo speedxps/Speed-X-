@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="css/style.css" />
   <style>
+    /* تنسيق الجدول */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -13,30 +14,54 @@
     }
 
     th, td {
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #ccc;
       text-align: center;
+      font-size: 16px;
     }
 
+    /* تحسين تنسيق الأزرار */
     button {
       margin: 5px;
-      padding: 8px 12px;
+      padding: 10px 20px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 14px;
     }
 
+    /* زر حذف */
     button.delete {
       background-color: #e74c3c;
       color: white;
     }
 
+    button.delete:hover {
+      background-color: #c0392b;
+      transform: translateY(-2px);
+    }
+
+    button.delete:active {
+      transform: translateY(1px);
+    }
+
+    /* زر طباعة */
     button.print {
       background-color: #3498db;
       color: white;
     }
 
-    /* تخصيص زر الطباعة الكلي */
+    button.print:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    button.print:active {
+      transform: translateY(1px);
+    }
+
+    /* زر طباعة جميع المشتركين */
     .print-all {
       background-color: #27ae60;
       color: white;
@@ -49,11 +74,29 @@
     .print-all:hover {
       background-color: #2ecc71;
     }
+
+    .print-all:active {
+      transform: translateY(1px);
+    }
+
+    /* تخصيص الجدول */
+    th {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    /* تخصيص النص */
+    h2 {
+      text-align: center;
+      font-size: 24px;
+      color: #2ecc71;
+    }
   </style>
 </head>
 <body>
   <div class="container manage-users">
     <h2>👥 إدارة المستخدمين</h2>
+    
     <!-- زر طباعة جميع المشتركين -->
     <button class="print-all" onclick="printAllUsers()">🖨️ طباعة جميع المشتركين</button>
 
