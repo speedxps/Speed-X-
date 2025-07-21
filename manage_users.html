@@ -1,118 +1,25 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <title>إدارة المستخدمين - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    /* تنسيق الجدول */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      padding: 12px;
-      border: 1px solid #ccc;
-      text-align: center;
-      font-size: 16px;
-    }
-
-    /* تحسين تنسيق الأزرار */
-    button {
-      margin: 5px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      font-size: 14px;
-    }
-
-    /* زر حذف */
-    button.delete {
-      background-color: #e74c3c;
-      color: white;
-    }
-
-    button.delete:hover {
-      background-color: #c0392b;
-      transform: translateY(-2px);
-    }
-
-    button.delete:active {
-      transform: translateY(1px);
-    }
-
-    /* زر طباعة */
-    button.print {
-      background-color: #3498db;
-      color: white;
-    }
-
-    button.print:hover {
-      background-color: #2980b9;
-      transform: translateY(-2px);
-    }
-
-    button.print:active {
-      transform: translateY(1px);
-    }
-
-    /* زر طباعة جميع المشتركين */
-    .print-all {
-      background-color: #27ae60;
-      color: white;
-      padding: 12px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin: 15px 0;
-    }
-
-    .print-all:hover {
-      background-color: #2ecc71;
-    }
-
-    .print-all:active {
-      transform: translateY(1px);
-    }
-
-    /* تخصيص الجدول */
-    th {
-      background-color: #2ecc71;
-      color: white;
-    }
-
-    /* تخصيص النص */
-    h2 {
-      text-align: center;
-      font-size: 24px;
-      color: #2ecc71;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>إدارة المستخدمين - SpeedX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container manage-users">
-    <h2>👥 إدارة المستخدمين</h2>
-    
-    <!-- زر طباعة جميع المشتركين -->
-    <button class="print-all" onclick="printAllUsers()">🖨️ طباعة جميع المشتركين</button>
-
-    <table>
-      <thead>
-        <tr>
-          <th>رقم الجوال</th>
-          <th>نوع المستخدم</th>
-          <th>إجراء</th>
-        </tr>
-      </thead>
-      <tbody id="usersTableBody">
-        <!-- المستخدمون هنا -->
-      </tbody>
-    </table>
-  </div>
+  <h2>👥 إدارة المستخدمين</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>رقم الجوال</th>
+        <th>نوع المستخدم</th>
+        <th>إجراء</th>
+      </tr>
+    </thead>
+    <tbody id="usersTableBody">
+      <!-- سيتم ملأ البيانات هنا -->
+    </tbody>
+  </table>
 
   <script>
     const users = [
@@ -131,8 +38,8 @@
           <td>${user.username}</td>
           <td>${user.role}</td>
           <td>
-            <button class="delete" onclick="deleteUser(${index})">🗑️ حذف</button>
-            ${user.role !== 'مدير' ? `<button class="print" onclick="printUser('${user.username}', '${user.role}')">🖨️ طباعة</button>` : ""}
+            <button onclick="deleteUser(${index})">🗑️ حذف</button>
+            <button onclick="printUser('${user.username}', '${user.role}')">🖨️ طباعة</button>
           </td>
         `;
         table.appendChild(row);
@@ -147,32 +54,13 @@
     }
 
     function printUser(phone, role) {
-      const name = "مشترك"; // يمكن تعديله ليكون اسم حقيقي إذا توفر
+      const name = "مشترك"; // يمكن تعديلها بناءً على قاعدة البيانات
       const location = "غير محدد";
       const plan = "غير معروف";
       const date = new Date().toISOString().split('T')[0];
       const price = "0";
 
       const printUrl = `print-user.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&location=${encodeURIComponent(location)}&plan=${encodeURIComponent(plan)}&date=${encodeURIComponent(date)}&price=${encodeURIComponent(price)}`;
-      window.open(printUrl, '_blank');
-    }
-
-    function printAllUsers() {
-      // فتح صفحة الطباعة لجميع المشتركين
-      let printUrl = "print-user.html?allUsers=";
-      const allUsersData = users.map(user => {
-        return {
-          name: "مشترك", // افتراضياً يمكن تعديلها
-          phone: user.username,
-          role: user.role,
-          location: "غير محدد",
-          plan: "غير معروف",
-          date: new Date().toISOString().split('T')[0],
-          price: "0"
-        };
-      });
-
-      printUrl += encodeURIComponent(JSON.stringify(allUsersData));
       window.open(printUrl, '_blank');
     }
 
