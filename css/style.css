@@ -99,9 +99,10 @@ button.small:hover {
 /* الصفحة الرئيسية (dashboard) */
 .dashboard-main {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 15px;
-  margin-top: 20px;
+  padding: 20px;
+  margin-top: 10px;
 }
 
 .card {
@@ -111,6 +112,9 @@ button.small:hover {
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
+  font-size: 17px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
 .card:hover {
@@ -120,6 +124,14 @@ button.small:hover {
 
 .card:active {
   transform: translateY(0);
+}
+
+/* زر اتصل بالدعم */
+.card.support-call {
+  background-color: #ff4d4d !important;
+  color: #fff;
+  grid-column: span 2;
+  font-size: 18px;
 }
 
 /* ملاحظة أسفل النماذج */
@@ -145,7 +157,12 @@ button.small:hover {
   .card {
     padding: 15px;
   }
+
+  .dashboard-main {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
 }
+
 .profile-avatar {
   width: 120px;
   height: 120px;
@@ -162,6 +179,7 @@ button.small:hover {
     height: 90px;
   }
 }
+
 /* صفحة الأدمن */
 .admin-dashboard {
   text-align: center;
@@ -188,6 +206,7 @@ button.small:hover {
 .admin-buttons button:hover {
   background-color: #1976D2;
 }
+
 .admin-buttons button, .bills button {
   background-color: #FF9800;
 }
