@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
-  <title>Print All Users - SpeedX</title>
+  <title>طباعة بيانات المشترك - SpeedX</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -12,10 +12,10 @@
     }
 
     .print-container {
-      max-width: 100%;
-      margin: 20px;
-      padding: 30px;
+      max-width: 700px;
+      margin: auto;
       border: 2px solid #444;
+      padding: 30px;
       border-radius: 10px;
     }
 
@@ -33,7 +33,6 @@
     .print-header h2 {
       font-size: 28px;
       color: #1a90ff;
-      margin: 0;
     }
 
     table.print-table {
@@ -65,19 +64,6 @@
         display: none;
       }
     }
-
-    .no-print {
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .no-print a {
-      text-decoration: none;
-      background-color: #1a90ff;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-    }
   </style>
 </head>
 <body onload="window.print()">
@@ -85,7 +71,7 @@
   <div class="print-container">
     <div class="print-header">
       <img src="images/logo.png" alt="Company Logo" />
-      <h2>SpeedX - All Users</h2>
+      <h2>SpeedX - User Details</h2>
     </div>
 
     <table class="print-table">
@@ -117,22 +103,12 @@
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const allUsers = JSON.parse(decodeURIComponent(params.get('allUsers') || '[]'));
-
-    const table = document.getElementById('usersTableBody');
-    allUsers.forEach(user => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${user.name}</td>
-        <td>${user.phone}</td>
-        <td>${user.role}</td>
-        <td>${user.location}</td>
-        <td>${user.plan}</td>
-        <td>${user.date}</td>
-        <td>${user.price}</td>
-      `;
-      table.appendChild(row);
-    });
+    document.getElementById('name').textContent = params.get('name') || 'غير محدد';
+    document.getElementById('phone').textContent = params.get('phone') || 'غير متوفر';
+    document.getElementById('location').textContent = params.get('location') || 'غير محدد';
+    document.getElementById('plan').textContent = params.get('plan') || 'غير محدد';
+    document.getElementById('date').textContent = params.get('date') || 'غير متوفر';
+    document.getElementById('price').textContent = (params.get('price') || '-') + ' ₪';
   </script>
 
 </body>
