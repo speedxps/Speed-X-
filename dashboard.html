@@ -1,138 +1,25 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة التحكم - SpeedX</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      direction: rtl;
-    }header {
-  background-color: #2196F3;
-  color: white;
-  text-align: center;
-  padding: 15px 0;
-  font-size: 20px;
-}
-
-.container {
-  padding: 20px;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 15px;
-  margin-bottom: 30px;
-}
-
-.card {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-  cursor: pointer;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.speed-box {
-  text-align: center;
-  margin-bottom: 20px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.speed-value {
-  font-size: 32px;
-  font-weight: bold;
-  color: #4CAF50;
-}
-
-.speed-button {
-  margin-top: 10px;
-  background-color: #FF9800;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.speed-button:hover {
-  background-color: #fb8c00;
-}
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  border-top: 1px solid #ccc;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-}
-
-.bottom-nav a {
-  text-decoration: none;
-  color: #2196F3;
-  font-weight: bold;
-  text-align: center;
-}
-
-.support-button {
-  background-color: #FF5722;
-  color: white;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-  </style>
-</head><body>
-  <header>مرحبًا، <span id="username">عميلنا العزيز</span></header>  <div class="container">
-    <div class="speed-box">
-      <div>السرعة الحالية</div>
-      <div class="speed-value" id="speedValue">32 Mbps</div>
-      <button class="speed-button" onclick="simulateSpeedTest()">فحص السرعة</button>
-    </div><div class="grid">
-  <div class="card">الرئيسية</div>
-  <div class="card">الفواتير</div>
-  <div class="card">الإعدادات</div>
-  <div class="card support-button">اتصل بالدعم</div>
-</div>
-
-  </div>  <div class="bottom-nav">
-    <a href="#">الرئيسية</a>
-    <a href="#">حسابي</a>
-    <a href="#">الإشعارات</a>
-  </div>  <script>
-    // اسم المستخدم المسجل
-    const userName = "أحمد"; // اجلبه ديناميكيًا من تسجيل الدخول
-    document.getElementById("username").textContent = userName;
-
-    // فحص سرعة وهمية
-    function simulateSpeedTest() {
-      let baseSpeed = 32;
-      let maxSpeed = baseSpeed + 2;
-      let speed = 0;
-      let display = document.getElementById("speedValue");
-      let interval = setInterval(() => {
-        speed += 1;
-        display.textContent = speed + " Mbps";
-        if (speed >= maxSpeed) clearInterval(interval);
-      }, 100);
-    }
-  </script></body></html>
+[
+  {
+    "username": "noor",
+    "phone": "0599999999",
+    "password": "noor123",
+    "email": "noor@example.com",
+    "location": "نابلس",
+    "bills": [
+      { "month": "يونيو 2025", "amount": "90 شيكل", "status": "مدفوعة" },
+      { "month": "مايو 2025", "amount": "90 شيكل", "status": "غير مدفوعة" },
+      { "month": "أبريل 2025", "amount": "90 شيكل", "status": "مدفوعة" }
+    ]
+  },
+  {
+    "username": "mohammed",
+    "phone": "0566666666",
+    "password": "m123456",
+    "email": "mohammed@example.com",
+    "location": "رام الله",
+    "bills": [
+      { "month": "يونيو 2025", "amount": "85 شيكل", "status": "مدفوعة" },
+      { "month": "مايو 2025", "amount": "85 شيكل", "status": "مدفوعة" }
+    ]
+  }
+]
