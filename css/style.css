@@ -1,7 +1,7 @@
 /* إعدادات عامة */
 body {
   font-family: 'Cairo', sans-serif;
-  background-color: #f5f7fa;
+  background-color: #f4f6f7;
   color: #333;
   margin: 0;
   padding: 0;
@@ -9,7 +9,13 @@ body {
 }
 
 h2 {
-  color: #ffffff;
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+
+h3 {
+  color: #4CAF50;
   text-align: center;
   margin-top: 20px;
 }
@@ -57,6 +63,7 @@ button {
   font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 10px; /* المسافة بين الأزرار */
 }
 
 button:hover {
@@ -106,7 +113,7 @@ button.small:hover {
 .dashboard-main {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 20px; /* زيادة المسافة بين الأزرار */
+  gap: 25px; /* المسافة بين الأزرار */
   padding: 20px;
   margin-top: 10px;
 }
@@ -140,21 +147,60 @@ button.small:hover {
   font-size: 18px;
 }
 
-/* ملاحظة أسفل النماذج */
-.note {
-  font-size: 14px;
-  color: #888;
-  text-align: center;
+/* شريط تحميل */
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
 }
 
-/* رسالة النجاح */
-#successMsg, #contactSuccess {
-  text-align: center;
-  color: #4CAF50;
-  font-weight: bold;
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
 }
 
-/* دعم الهواتف */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.no-print {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.no-print a {
+  text-decoration: none;
+  background-color: #1a90ff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.print-all {
+  background-color: #27ae60;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px 0;
+}
+
+.print-all:hover {
+  background-color: #2ecc71;
+}
+
+.print-all:active {
+  transform: translateY(1px);
+}
+
+/* تحسين التنسيق في الهواتف */
 @media (max-width: 600px) {
   .container {
     margin: 20px;
@@ -169,23 +215,6 @@ button.small:hover {
   }
 }
 
-.profile-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-width: 480px) {
-  .profile-avatar {
-    width: 90px;
-    height: 90px;
-  }
-}
-
 /* صفحة الأدمن */
 .admin-dashboard {
   text-align: center;
@@ -193,8 +222,8 @@ button.small:hover {
 
 .admin-buttons {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 25px; /* زيادة المسافة بين الأزرار */
   margin-top: 20px;
 }
 
