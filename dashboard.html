@@ -5,6 +5,100 @@
   <title>لوحة التحكم - Speed X 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      margin: 0;
+      background-color: #f5f8fa;
+    }
+
+    .header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 4px solid #388E3C;
+    }
+
+    .header .logo {
+      width: 60px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .header h2 {
+      margin: 0 0 10px;
+    }
+
+    .header button {
+      background-color: #ffffff;
+      color: #4CAF50;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .dashboard-main {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #e3f2fd;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .card:hover {
+      background-color: #d0ebff;
+    }
+
+    .card.support-call {
+      background-color: #ff5252;
+      color: white;
+      grid-column: span 2;
+      font-size: 20px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #ffffff;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+
+    .nav-btn {
+      background-color: transparent;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #4CAF50;
+    }
+
+    @media (max-width: 500px) {
+      .dashboard-main {
+        grid-template-columns: 1fr;
+      }
+
+      .card.support-call {
+        font-size: 18px;
+      }
+    }
+  </style>
 </head>
 <body class="dashboard-body">
   <header class="header">
@@ -21,7 +115,7 @@
     <div class="card" onclick="goTo('upgrade.html')">🚀 ترقية السرعة</div>
     <div class="card" onclick="goTo('relocation.html')">📦 طلب نقل موقع</div>
     <div class="card" onclick="goTo('router.html')">📡 شراء راوتر</div>
-    <div class="card" onclick="callSupport()">📞 اتصل بالدعم</div>
+    <div class="card support-call" onclick="callSupport()">📞 اتصل بالدعم</div>
   </main>
 
   <footer class="bottom-nav">
@@ -33,7 +127,7 @@
   <script>
     const user = localStorage.getItem("loggedInUser");
     if (!user) {
-      window.location.href = "index.html"; // رجوع لصفحة تسجيل الدخول
+      window.location.href = "index.html";
     } else {
       document.getElementById("welcome-name").innerText = user;
     }
