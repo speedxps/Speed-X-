@@ -2,68 +2,103 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>الملف الشخصي - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ملفي الشخصي - SpeedX</title>
+  <link rel="stylesheet" href="css/style.css"> <!-- تأكد من صحة اسم ملف CSS -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #1976D2;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #1976D2;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #125a9c;
+    }
+
+    .success-msg {
+      color: #4CAF50;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
 </head>
-<body class="dashboard-body">
-  <header class="main-header">
-    <h2>👤 الملف الشخصي</h2>
-    <button onclick="goBack()" class="back-btn">🔙 رجوع</button>
-  </header>
+<body>
 
-  <main class="main-content">
-    <section class="profile-section">
-      <img id="profile-avatar" src="images/avatar.png" alt="User Avatar" class="profile-avatar">
-      <h3 id="profile-name">...</h3>
-      <p><strong>📱 رقم الهاتف:</strong> <span id="profile-phone"></span></p>
-      <p><strong>📧 البريد الإلكتروني:</strong> <span id="profile-email"></span></p>
-      <p><strong>📍 الموقع:</strong> <span id="profile-location"></span></p>
-      <button class="edit-btn" onclick="alert('🛠️ ميزة التعديل قيد التطوير')">✏️ تعديل المعلومات</button>
-    </section>
-  </main>
+  <div class="container">
+    <h2>ملفي الشخصي</h2>
+    <form id="profileForm">
+      <label for="username">اسم المستخدم</label>
+      <input type="text" id="username" name="username" value="speedx_user" required>
 
-  <footer class="bottom-nav">
-    <button class="nav-btn" onclick="location.href='dashboard.html'">🏠 الرئيسية</button>
-    <button class="nav-btn" onclick="location.href='bills.html'">💳 فواتيري</button>
-    <button class="nav-btn" onclick="location.href='support.html'">📞 الدعم</button>
-  </footer>
+      <label for="email">البريد الإلكتروني</label>
+      <input type="email" id="email" name="email" value="user@example.com" required>
+
+      <label for="password">كلمة المرور</label>
+      <input type="password" id="password" name="password" placeholder="••••••••" required>
+
+      <button type="submit">تحديث المعلومات</button>
+      <div id="successMessage" class="success-msg">✅ تم تحديث البيانات بنجاح</div>
+    </form>
+  </div>
 
   <script>
-    const username = localStorage.getItem("loggedInUser");
-
-    fetch("data/users.json")
-      .then(res => res.json())
-      .then(users => {
-        const user = users.find(u => u.username === username);
-        if (!user) {
-          alert("⚠️ المستخدم غير موجود.");
-          window.location.href = "index.html";
-          return;
-        }
-
-        document.getElementById("profile-name").innerText = user.username;
-        document.getElementById("profile-phone").innerText = user.phone;
-        document.getElementById("profile-email").innerText = user.email;
-        document.getElementById("profile-location").innerText = user.location;
-
-        // تحميل الصورة حسب اسم المستخدم أو صورة افتراضية
-        const avatarPath = `images/${user.username}.png`;
-        fetch(avatarPath)
-          .then(response => {
-            if (response.ok) {
-              document.getElementById("profile-avatar").src = avatarPath;
-            }
-          });
-      })
-      .catch(err => {
-        console.error("خطأ في تحميل بيانات الملف الشخصي:", err);
-        alert("🚨 حدث خطأ أثناء تحميل البيانات.");
-      });
-
-    function goBack() {
-      window.location.href = "dashboard.html";
-    }
+    // إظهار رسالة نجاح وهمية عند تحديث البيانات
+    document.getElementById("profileForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("successMessage").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("successMessage").style.display = "none";
+      }, 3000);
+    });
   </script>
+
 </body>
 </html>
