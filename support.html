@@ -2,53 +2,109 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>📞 الدعم الفني - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الدعم الفني - SpeedX</title>
+  <link rel="stylesheet" href="css/style.css"> <!-- تأكد أن هذا المسار يطابق اسم ملف CSS لديك -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 60px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #1976D2;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      background-color: #1976D2;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #125a9c;
+    }
+
+    .success-msg {
+      color: #4CAF50;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
 </head>
-<body class="dashboard-body">
-  <header class="main-header">
-    <h2>📞 الدعم الفني</h2>
-  </header>
+<body>
 
-  <main class="main-content">
-    <section class="support-section">
-      <h3>مرحبًا، <span id="welcome-name"></span></h3>
-      <p>لأي مشكلة أو استفسار تواصل معنا:</p>
-      <ul>
-        <li>📞 الرقم: <a href="tel:0599123456">0599123456</a></li>
-        <li>📧 البريد: <a href="mailto:support@speedx.ps">support@speedx.ps</a></li>
-        <li>⏰ مواعيد العمل: 8 صباحًا - 8 مساءً</li>
-      </ul>
+  <div class="container">
+    <h2>اتصل بالدعم الفني</h2>
+    <form id="supportForm">
+      <label for="name">الاسم</label>
+      <input type="text" id="name" name="name" required>
 
-      <h3>📬 إرسال طلب دعم</h3>
-      <form id="support-form">
-        <label for="subject">الموضوع:</label>
-        <input type="text" id="subject" required>
+      <label for="email">البريد الإلكتروني</label>
+      <input type="email" id="email" name="email" required>
 
-        <label for="message">الرسالة:</label>
-        <textarea id="message" rows="5" required></textarea>
+      <label for="message">الرسالة</label>
+      <textarea id="message" name="message" required></textarea>
 
-        <button type="submit" class="edit-btn">📤 إرسال</button>
-      </form>
-      <p id="response-msg" style="color: green;"></p>
-    </section>
-  </main>
-
-  <footer class="bottom-nav">
-    <button class="nav-btn" onclick="location.href='dashboard.html'">🏠 الرئيسية</button>
-    <button class="nav-btn" onclick="location.href='bills.html'">💳 الفواتير</button>
-  </footer>
+      <button type="submit">إرسال</button>
+      <div id="successMessage" class="success-msg">تم إرسال الرسالة بنجاح ✅</div>
+    </form>
+  </div>
 
   <script>
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    document.getElementById("welcome-name").innerText = userData ? userData.username : "مستخدم";
-
-    document.getElementById("support-form").addEventListener("submit", function(e) {
+    // عرض رسالة نجاح وهمية عند إرسال النموذج
+    document.getElementById("supportForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      document.getElementById("response-msg").innerText = "✅ تم إرسال الطلب بنجاح. سنرد عليك قريبًا.";
-      this.reset();
+      document.getElementById("successMessage").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("successMessage").style.display = "none";
+        document.getElementById("supportForm").reset();
+      }, 3000);
     });
   </script>
+
 </body>
 </html>
