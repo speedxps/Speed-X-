@@ -1,25 +1,177 @@
-[
-  {
-    "username": "noor",
-    "phone": "0599999999",
-    "password": "noor123",
-    "email": "noor@example.com",
-    "location": "نابلس",
-    "bills": [
-      { "month": "يونيو 2025", "amount": "90 شيكل", "status": "مدفوعة" },
-      { "month": "مايو 2025", "amount": "90 شيكل", "status": "غير مدفوعة" },
-      { "month": "أبريل 2025", "amount": "90 شيكل", "status": "مدفوعة" }
-    ]
-  },
-  {
-    "username": "mohammed",
-    "phone": "0566666666",
-    "password": "m123456",
-    "email": "mohammed@example.com",
-    "location": "رام الله",
-    "bills": [
-      { "month": "يونيو 2025", "amount": "85 شيكل", "status": "مدفوعة" },
-      { "month": "مايو 2025", "amount": "85 شيكل", "status": "مدفوعة" }
-    ]
-  }
-]
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم - SpeedX</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+    .header {
+      background-color: #6bc641;
+      color: white;
+      padding: 20px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+    .header .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header .top-row img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .card {
+      background-color: white;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .pay-btn {
+      background-color: #6bc641;
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .speed-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+    .speed-box span {
+      font-size: 28px;
+      font-weight: bold;
+      color: #007bff;
+    }
+    .quick-access {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 20px;
+    }
+    .quick-access .item {
+      background-color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      font-size: 14px;
+    }
+    .quick-access .item i {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #6bc641;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #ddd;
+    }
+    .bottom-nav div {
+      text-align: center;
+      font-size: 12px;
+      color: #333;
+    }
+    .bottom-nav .active {
+      color: #6bc641;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="top-row">
+      <div>
+        <i class="fas fa-bell"></i><span style="background:red; border-radius: 50%; padding:2px 6px; font-size: 12px; margin-right: 5px;">7</span>
+        <i class="fas fa-search" style="margin-right: 10px;"></i>
+      </div>
+      <div>
+        <span>مساء الخير ☀️</span><br>
+        <strong>نور</strong>
+      </div>
+      <img src="images/profile.jpg" alt="الصورة الشخصية">
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <div>آخر فاتورة</div>
+        <div style="font-size:24px; font-weight:bold;">₪ 127.6</div>
+        <div style="color: #e74c3c; font-size: 13px;">إجمالي المبالغ غير المسددة ₪ 127.6</div>
+      </div>
+      <button class="pay-btn">ادفع فواتيرك</button>
+    </div>
+    <hr>
+    <div>
+      <div style="font-size:14px; margin-bottom: 5px;">السرعة <a href="#" style="color:#007bff">تغيير السرعة</a></div>
+      <div class="speed-box">
+        <div>0 دقائق 📞</div>
+        <span>100 Mbps</span>
+        <div>0 دقائق 🌐</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-access">
+    <div class="item">
+      <i class="fas fa-file-invoice"></i>
+      فواتيرك
+    </div>
+    <div class="item">
+      <i class="fas fa-phone"></i>
+      دليل الهاتف
+    </div>
+    <div class="item">
+      <i class="fas fa-tools"></i>
+      طلب تقديم عطل
+    </div>
+    <div class="item">
+      <i class="fas fa-phone-alt"></i>
+      دليل الهاتف
+    </div>
+    <div class="item">
+      <i class="fas fa-wifi"></i>
+      إعدادات الراوتر
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="active">
+      <i class="fas fa-home"></i><br>
+      الرئيسية
+    </div>
+    <div>
+      <i class="fas fa-th-large"></i><br>
+      الخدمات
+    </div>
+    <div>
+      <i class="fas fa-store"></i><br>
+      المتجر
+    </div>
+    <div>
+      <i class="fas fa-cog"></i><br>
+      المزيد
+    </div>
+  </div>
+</body>
+</html>
