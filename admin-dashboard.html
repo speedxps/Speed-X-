@@ -1,19 +1,151 @@
-<button onclick="printUserData()">طباعة بيانات المشترك</button>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة تحكم الأدمن - SpeedX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* تحسين الخطوط */
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: #6bc641;
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
 
-<script>
-  function printUserData() {
-    // بيانات المشترك (يمكن الحصول عليها من النموذج أو قاعدة البيانات)
-    const name = "محمد علي";
-    const phone = "0123456789";
-    const location = "الرياض";
-    const plan = "باقة 50GB";
-    const date = "2023-05-15";
-    const price = "50"; // السعر بـ₪
+    header .logo {
+      max-width: 120px;
+      margin-bottom: 20px;
+    }
 
-    // بناء الرابط الذي يحتوي على المعلمات
-    const printUrl = `print-user.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&location=${encodeURIComponent(location)}&plan=${encodeURIComponent(plan)}&date=${encodeURIComponent(date)}&price=${encodeURIComponent(price)}`;
+    /* تنسيق الأزرار */
+    .admin-dashboard {
+      padding: 30px;
+      text-align: center;
+    }
 
-    // توجيه المستخدم إلى صفحة الطباعة
-    window.location.href = printUrl;
-  }
-</script>
+    .admin-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      padding: 20px 10px;
+    }
+
+    .admin-buttons button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .admin-buttons button:hover {
+      background-color: #45a049;
+      transform: translateY(-3px);
+    }
+
+    .admin-buttons button:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* تحسين التفاعل على الجوال */
+    @media (max-width: 768px) {
+      .admin-buttons {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .admin-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="admin-body">
+  <header class="header">
+    <img src="images/logo.png" alt="Logo" class="logo">
+    <h2>👑 لوحة تحكم الأدمن</h2>
+    <button onclick="logout()">🚪 تسجيل الخروج</button>
+  </header>
+
+  <main class="admin-dashboard">
+    <h3>⚙️ إدارة الموقع</h3>
+    <div class="admin-buttons">
+      <button onclick="manageUsers()">👥 إدارة المشتركين</button>
+      <button onclick="sendNotification()">🔔 إرسال إشعار</button>
+      <button onclick="manageBills()">💳 إدارة الفواتير</button>
+      <button onclick="printReports()">🖨️ طباعة التقارير العامة</button>
+      <button onclick="exportData()">📂 تحميل البيانات</button>
+      <button onclick="changePassword()">🔑 تغيير كلمة المرور</button>
+      <button onclick="printUserData()">🖨️ طباعة بيانات المشترك</button> <!-- زر الطباعة -->
+    </div>
+  </main>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    }
+
+    function manageUsers() {
+      window.location.href = "manage_users.html";
+    }
+
+    function sendNotification() {
+      window.location.href = "send_notification.html";
+    }
+
+    function manageBills() {
+      window.location.href = "admin_bills.html";
+    }
+
+    function printReports() {
+      // طباعة التقارير العامة لجميع المشتركين
+      window.print();
+    }
+
+    function exportData() {
+      alert("📂 سيتم تحميل جميع بيانات الموقع كـ JSON.");
+      // هنا يمكن إضافة وظيفة لتصدير البيانات الفعلية كـ JSON.
+    }
+
+    function changePassword() {
+      alert("🔑 سيتم تفعيل تغيير كلمة المرور في التحديث القادم.");
+    }
+
+    function printUserData() {
+      // افترض أن لدينا بيانات المشترك
+      const name = "محمد علي"; // بيانات ديناميكية من قاعدة البيانات أو النموذج
+      const phone = "0123456789";
+      const location = "الرياض";
+      const plan = "باقة 50GB";
+      const date = "2023-05-15";
+      const price = "50"; // السعر بـ₪
+
+      // بناء الرابط الذي يحتوي على المعلمات
+      const printUrl = `print-user.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&location=${encodeURIComponent(location)}&plan=${encodeURIComponent(plan)}&date=${encodeURIComponent(date)}&price=${encodeURIComponent(price)}`;
+
+      // توجيه المستخدم إلى صفحة الطباعة
+      window.location.href = printUrl;
+    }
+  </script>
+</body>
+</html>
