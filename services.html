@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>الخدمات - SpeedX</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    /* تحسين الأزرار والتنسيق */
     body {
       font-family: 'Cairo', sans-serif;
       background-color: #f9f9f9;
@@ -37,7 +37,7 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      transition: transform 0.3s ease;
     }
     .service:hover {
       transform: scale(1.05);
@@ -61,7 +61,7 @@
       <i class="fas fa-file-invoice"></i>
       <div class="service-title">عرض الفواتير</div>
     </div>
-    <!-- طلب صيانة / عطل (تم تعديل الرابط هنا) -->
+    <!-- طلب صيانة / عطل -->
     <div class="service" onclick="window.location.href='contact.html'">
       <i class="fas fa-tools"></i>
       <div class="service-title">طلب صيانة / عطل</div>
@@ -78,11 +78,9 @@
     </div>
   </div>
 
-  <!-- أكواد JavaScript لتفعيل الأزرار -->
   <script>
     function callSupport() {
-      // عند الضغط على زر الاتصال بالدعم الفني، يتم الاتصال مباشرة
-      window.location.href = "tel:+1234567890"; // استبدل الرقم بالرقم الفعلي لدعم الفني
+      window.location.href = "tel:+1234567890"; // استبدل الرقم الفعلي لدعم الفني
     }
   </script>
 </body>
