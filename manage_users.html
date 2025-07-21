@@ -5,6 +5,37 @@
   <title>إدارة المستخدمين - Speed X</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button.delete {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    button.print {
+      background-color: #3498db;
+      color: white;
+    }
+  </style>
 </head>
 <body>
   <div class="container manage-users">
@@ -39,7 +70,10 @@
         row.innerHTML = `
           <td>${user.username}</td>
           <td>${user.role}</td>
-          <td><button onclick="deleteUser(${index})">حذف</button></td>
+          <td>
+            <button class="delete" onclick="deleteUser(${index})">🗑️ حذف</button>
+            ${user.role !== 'مدير' ? `<button class="print" onclick="printUser('${user.username}', '${user.role}')">🖨️ طباعة</button>` : ""}
+          </td>
         `;
         table.appendChild(row);
       });
@@ -50,6 +84,17 @@
         users.splice(index, 1);
         renderUsers();
       }
+    }
+
+    function printUser(phone, role) {
+      const name = "مشترك"; // يمكن تعديله ليكون اسم حقيقي إذا توفر
+      const location = "غير محدد";
+      const plan = "غير معروف";
+      const date = new Date().toISOString().split('T')[0];
+      const price = "0";
+
+      const printUrl = `print-user.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&location=${encodeURIComponent(location)}&plan=${encodeURIComponent(plan)}&date=${encodeURIComponent(date)}&price=${encodeURIComponent(price)}`;
+      window.open(printUrl, '_blank');
     }
 
     renderUsers();
