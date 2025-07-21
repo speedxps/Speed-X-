@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Print User Details - SpeedX</title>
+  <title>Print All Users - SpeedX</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
       background: white;
       color: #000;
       padding: 40px;
-      margin: 0;
     }
 
     .print-container {
@@ -62,19 +61,8 @@
     }
 
     @media print {
-      body {
-        margin: 0;
-        padding: 0;
-        font-size: 12px;
-      }
-
       .no-print {
         display: none;
-      }
-
-      .print-container {
-        width: 100%;
-        max-width: 100%;
       }
     }
 
@@ -97,16 +85,24 @@
   <div class="print-container">
     <div class="print-header">
       <img src="images/logo.png" alt="Company Logo" />
-      <h2>SpeedX - User Details</h2>
+      <h2>SpeedX - All Users</h2>
     </div>
 
     <table class="print-table">
-      <tr><th>Name</th><td id="name"></td></tr>
-      <tr><th>Phone Number</th><td id="phone"></td></tr>
-      <tr><th>Location</th><td id="location"></td></tr>
-      <tr><th>Plan</th><td id="plan"></td></tr>
-      <tr><th>Subscription Date</th><td id="date"></td></tr>
-      <tr><th>Price</th><td id="price"></td></tr>
+      <thead>
+        <tr>
+          <th>اسم المشترك</th>
+          <th>رقم الجوال</th>
+          <th>نوع المستخدم</th>
+          <th>الموقع</th>
+          <th>الباقة</th>
+          <th>تاريخ الاشتراك</th>
+          <th>السعر</th>
+        </tr>
+      </thead>
+      <tbody id="usersTableBody">
+        <!-- سيتم ملؤها بالبيانات من المعلمات -->
+      </tbody>
     </table>
 
     <div class="stamp">
@@ -116,17 +112,27 @@
   </div>
 
   <div class="no-print">
-    <a href="users.html">⬅️ Back to Users List</a>
+    <a href="manage_users.html">⬅️ Back to Manage Users</a>
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    document.getElementById('name').textContent = params.get('name') || '-';
-    document.getElementById('phone').textContent = params.get('phone') || '-';
-    document.getElementById('location').textContent = params.get('location') || '-';
-    document.getElementById('plan').textContent = params.get('plan') || '-';
-    document.getElementById('date').textContent = params.get('date') || '-';
-    document.getElementById('price').textContent = (params.get('price') || '-') + ' ₪';
+    const allUsers = JSON.parse(decodeURIComponent(params.get('allUsers') || '[]'));
+
+    const table = document.getElementById('usersTableBody');
+    allUsers.forEach(user => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${user.name}</td>
+        <td>${user.phone}</td>
+        <td>${user.role}</td>
+        <td>${user.location}</td>
+        <td>${user.plan}</td>
+        <td>${user.date}</td>
+        <td>${user.price}</td>
+      `;
+      table.appendChild(row);
+    });
   </script>
 
 </body>
