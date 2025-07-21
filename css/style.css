@@ -1,7 +1,7 @@
 /* إعدادات عامة */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f5f7fa;
+  font-family: 'Cairo', sans-serif;
+  background-color: #f4f6f7;
   color: #333;
   margin: 0;
   padding: 0;
@@ -55,11 +55,16 @@ button {
   border-radius: 8px;
   font-size: 18px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
   background-color: #45a049;
+  transform: translateY(-2px); /* تأثير رفع الزر عند التمرير */
+}
+
+button:active {
+  transform: translateY(1px); /* تأثير الضغط على الزر */
 }
 
 /* الجدول */
@@ -100,7 +105,7 @@ button.small:hover {
 .dashboard-main {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 15px;
+  gap: 20px; /* زيادة المسافة بين الأزرار */
   padding: 20px;
   margin-top: 10px;
 }
@@ -187,8 +192,8 @@ button.small:hover {
 
 .admin-buttons {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px; /* زيادة المسافة بين الأزرار */
   margin-top: 20px;
 }
 
@@ -200,11 +205,12 @@ button.small:hover {
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .admin-buttons button:hover {
   background-color: #1976D2;
+  transform: translateY(-3px);
 }
 
 .admin-buttons button, .bills button {
