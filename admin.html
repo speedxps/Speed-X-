@@ -5,6 +5,89 @@
   <title>لوحة تحكم الأدمن - Speed X</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* تحسين الخطوط */
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: #6bc641;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    header .logo {
+      max-width: 150px;
+      margin-bottom: 10px;
+    }
+
+    .admin-dashboard {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .admin-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+      padding: 20px 10px;
+    }
+
+    .admin-buttons button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, background-color 0.3s;
+    }
+
+    .admin-buttons button:hover {
+      background-color: #45a049;
+      transform: translateY(-3px);
+    }
+
+    .admin-buttons button:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-icon {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+
+    .header h2 {
+      font-size: 28px;
+      margin-right: 20px;
+    }
+
+    /* تحسين التفاعل على الجوال */
+    @media (max-width: 768px) {
+      .admin-buttons {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .admin-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
 </head>
 <body class="admin-body">
   <header class="header">
@@ -48,12 +131,40 @@
     }
 
     function exportData() {
-      alert("📂 سيتم تحميل جميع بيانات الموقع كـ JSON.");
+      showToast("📂 سيتم تحميل جميع بيانات الموقع كـ JSON.");
     }
 
     function changePassword() {
-      alert("🔑 سيتم تفعيل تغيير كلمة المرور في التحديث القادم.");
+      showToast("🔑 سيتم تفعيل تغيير كلمة المرور في التحديث القادم.");
+    }
+
+    // دالة لإظهار إشعارات صغيرة (Toast Notifications)
+    function showToast(message) {
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = 0;
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
     }
   </script>
+
+  <style>
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+  </style>
 </body>
 </html>
