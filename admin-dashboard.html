@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* تحسين تنسيق الجسم */
     body {
       font-family: 'Cairo', sans-serif;
       background-color: #f4f6f7;
@@ -14,7 +13,29 @@
       padding: 0;
     }
 
-    /* تحسين تنسيق الهيدر */
+    /* قائمة جانبية */
+    .sidebar {
+      width: 250px;
+      height: 100%;
+      background-color: #2c3e50;
+      color: white;
+      position: fixed;
+      padding-top: 20px;
+      left: 0;
+    }
+
+    .sidebar a {
+      color: white;
+      padding: 12px;
+      text-decoration: none;
+      display: block;
+      font-size: 18px;
+    }
+
+    .sidebar a:hover {
+      background-color: #1abc9c;
+    }
+
     header {
       background-color: #2ecc71;
       color: white;
@@ -25,14 +46,9 @@
       border-bottom-left-radius: 30px;
       border-bottom-right-radius: 30px;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      margin-left: 250px;
     }
 
-    header .logo {
-      width: 120px;
-      margin-bottom: 20px;
-    }
-
-    /* تحسين تنسيق المحتوى */
     .admin-dashboard {
       padding: 50px 20px;
       text-align: center;
@@ -40,6 +56,7 @@
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       border-radius: 15px;
       margin-top: 40px;
+      margin-left: 250px;
     }
 
     .admin-buttons {
@@ -72,22 +89,41 @@
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
-    /* تخصيص زر الرجوع */
-    button {
-      background-color: #e74c3c;
+    .loader {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .no-print {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .no-print a {
+      text-decoration: none;
+      background-color: #1a90ff;
       color: white;
-      padding: 12px 20px;
+      padding: 10px 20px;
       border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
     }
 
-    button:hover {
-      background-color: #c0392b;
-    }
-
-    /* تخصيص الزر الخاص بالطباعة الكلي */
     .print-all {
       background-color: #27ae60;
       color: white;
@@ -95,7 +131,6 @@
       border-radius: 8px;
       cursor: pointer;
       margin: 20px 0;
-      font-size: 18px;
     }
 
     .print-all:hover {
@@ -105,21 +140,18 @@
     .print-all:active {
       transform: translateY(1px);
     }
-
-    @media (max-width: 768px) {
-      .admin-buttons {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .admin-buttons {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
 </head>
 <body class="admin-body">
+  <div class="sidebar">
+    <ul>
+      <li><a href="manage_users.html">إدارة المشتركين</a></li>
+      <li><a href="admin_bills.html">إدارة الفواتير</a></li>
+      <li><a href="settings.html">الإعدادات</a></li>
+      <li><a href="index.html" onclick="logout()">تسجيل الخروج</a></li>
+    </ul>
+  </div>
+
   <header class="header">
     <img src="images/logo.png" alt="Logo" class="logo">
     <h2>👑 لوحة تحكم الأدمن</h2>
@@ -139,6 +171,11 @@
     </div>
   </main>
 
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     function logout() {
       localStorage.removeItem("loggedInUser");
@@ -185,6 +222,16 @@
 
       // توجيه المستخدم إلى صفحة الطباعة
       window.location.href = printUrl;
+    }
+
+    // عرض شريط التحميل
+    function showLoader() {
+      document.getElementById("loader").style.display = "block";
+    }
+
+    // إخفاء شريط التحميل
+    function hideLoader() {
+      document.getElementById("loader").style.display = "none";
     }
   </script>
 </body>
