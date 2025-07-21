@@ -1,43 +1,43 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>الطوارئ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الطوارئ - SpeedX</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <img src="images/logo.png" alt="شعار SpeedX" class="logo" />
+    <h2>طلب مساعدة طارئة</h2>
+
+    <p class="note">يرجى ملء التفاصيل التالية للتواصل مع قسم الطوارئ</p>
+
+    <form id="emergencyForm">
+      <label for="username">اسم المستخدم</label>
+      <input type="text" id="username" name="username" placeholder="أدخل اسمك الكامل" required />
+
+      <label for="location">الموقع الحالي</label>
+      <input type="text" id="location" name="location" placeholder="مثلاً: رام الله - حي المصايف" required />
+
+      <label for="issue">وصف الحالة</label>
+      <textarea id="issue" name="issue" rows="4" placeholder="اكتب هنا ما تواجهه بالتفصيل..." required></textarea>
+
+      <button type="submit">إرسال البلاغ</button>
+    </form>
+
+    <p id="successMsg" style="display:none;">✅ تم إرسال البلاغ بنجاح. سيتم التواصل معك فوراً.</p>
+  </div>
 
   <script>
-    const user = localStorage.getItem("loggedInUser");
-    if (!user) {
-      window.location.href = "login.html";
-    } else {
-      document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("welcome-name").innerText = user;
-      });
-    }
+    const form = document.getElementById('emergencyForm');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      successMsg.style.display = 'block';
+      form.reset();
+    });
   </script>
-</head>
-<body class="dashboard-body">
-
-  <header class="main-header">
-    <h1>نظام الطوارئ - Speed X</h1>
-  </header>
-
-  <main class="main-content">
-    <h2>مرحبًا، <span id="welcome-name"></span></h2>
-
-    <section class="emergency-section">
-      <h3>الحالات الطارئة</h3>
-      <ul id="emergency-list" class="notification-list">
-        <!-- عناصر الطوارئ ستظهر هنا -->
-      </ul>
-    </section>
-
-    <button id="logout-btn" class="edit-btn">تسجيل الخروج</button>
-  </main>
-
-  <script src="js/emergency.js"></script>
-  <script src="js/logout.js"></script>
 </body>
 </html>
