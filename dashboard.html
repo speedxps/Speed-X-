@@ -1,68 +1,143 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>الفواتير - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة تحكم SpeedX</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f2f4f8;
+      margin: 0;
+      padding-bottom: 70px;
+    }
+    .header {
+      text-align: center;
+      padding: 20px;
+    }
+    .header img {
+      width: 100px;
+    }
+    .welcome {
+      text-align: center;
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 15px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 15px;
+      padding: 0 15px;
+    }
+    .card {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      background-color: #e3f2fd;
+      transform: translateY(-5px);
+    }
+    .card i {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: #2196F3;
+    }
+    .speed-box {
+      background-color: #ffeb3b;
+      text-align: center;
+      padding: 15px;
+      margin: 20px 15px;
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #ccc;
+      padding: 10px 0;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    }
+    .bottom-nav a {
+      color: #888;
+      text-decoration: none;
+      text-align: center;
+      font-size: 14px;
+    }
+    .bottom-nav a.active {
+      color: #2196F3;
+    }
+    .bottom-nav i {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+    .support-card {
+      background-color: #ff5722 !important;
+      color: white;
+    }
+    .support-card i {
+      color: white;
+    }
+    @media (max-width: 480px) {
+      .card {
+        padding: 15px;
+      }
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container bills">
-    <h2>💳 فواتيرك الشهرية</h2>
-
-    <!-- زر طباعة الفاتورة الأخيرة -->
-    <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
-
-    <table>
-      <thead>
-        <tr>
-          <th>الشهر</th>
-          <th>القيمة</th>
-          <th>الحالة</th>
-        </tr>
-      </thead>
-      <tbody id="billsTableBody">
-        <!-- البيانات ستُضاف هنا -->
-      </tbody>
-    </table>
+  <div class="header">
+    <img src="images/logo.png" alt="SpeedX Logo" />
+  </div>  <div class="welcome">
+    مرحبًا بك، عميلنا العزيز 🌟
+  </div>  <div class="speed-box">
+    السرعة الحالية: 45 Mbps
+  </div>  <div class="cards">
+    <div class="card">
+      <i class="fas fa-signal"></i>
+      <div>الباقة</div>
+    </div>
+    <div class="card">
+      <i class="fas fa-file-invoice-dollar"></i>
+      <div>الفواتير</div>
+    </div>
+    <div class="card">
+      <i class="fas fa-bell"></i>
+      <div>الإشعارات</div>
+    </div>
+    <div class="card support-card">
+      <i class="fas fa-headset"></i>
+      <div>اتصل بالدعم</div>
+    </div>
+  </div>  <div class="bottom-nav">
+    <a href="dashboard.html" class="active">
+      <i class="fas fa-home"></i>
+      الرئيسية
+    </a>
+    <a href="support.html">
+      <i class="fas fa-headset"></i>
+      الدعم
+    </a>
+    <a href="profile.html">
+      <i class="fas fa-user"></i>
+      حسابي
+    </a>
   </div>
-
-  <script>
-    const user = localStorage.getItem("loggedInUser") || "guest";
-
-    const sampleBills = [
-      { month: "يونيو 2025", amount: "90 شيكل", status: "مدفوعة" },
-      { month: "مايو 2025", amount: "90 شيكل", status: "غير مدفوعة" },
-      { month: "أبريل 2025", amount: "90 شيكل", status: "مدفوعة" }
-    ];
-
-    const tbody = document.getElementById("billsTableBody");
-    sampleBills.forEach(bill => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${bill.month}</td>
-        <td>${bill.amount}</td>
-        <td>${bill.status}</td>
-      `;
-      tbody.appendChild(row);
-    });
-
-    // دالة طباعة الفاتورة الأخيرة
-    function printLastBill() {
-      const lastBill = sampleBills[0]; // أول عنصر (أحدث فاتورة)
-      const printContent = `
-        <h2>فاتورتي الأخيرة</h2>
-        <p>📅 الشهر: ${lastBill.month}</p>
-        <p>💳 القيمة: ${lastBill.amount}</p>
-        <p>✅ الحالة: ${lastBill.status}</p>
-      `;
-      const printWindow = window.open('', '', 'height=600,width=800');
-      printWindow.document.write('<html><head><title>طباعة فاتورتي</title></head><body>');
-      printWindow.document.write(printContent);
-      printWindow.document.write('</body></html>');
-      printWindow.document.close();
-      printWindow.print();
-    }
-  </script>
 </body>
 </html>
