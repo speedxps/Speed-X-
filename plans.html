@@ -1,70 +1,127 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>الباقات - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-
-  <script>
-    const user = localStorage.getItem("loggedInUser");
-    if (!user) {
-      window.location.href = "login.html";
-    } else {
-      document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("welcome-name").innerText = user;
-      });
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>الباقات - SpeedX</title>
+  <link rel="stylesheet" href="css/style.css"> <!-- تأكد من وجود ملف style.css -->
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 0;
     }
-  </script>
+
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #1976D2;
+      margin-bottom: 30px;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .plan-card {
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .plan-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1976D2;
+      margin-bottom: 15px;
+    }
+
+    .plan-price {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .plan-features {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+
+    .plan-features li {
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .select-btn {
+      background-color: #1976D2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .select-btn:hover {
+      background-color: #125a9c;
+    }
+  </style>
 </head>
-<body class="dashboard-body">
+<body>
 
-  <header class="main-header">
-    <h1>الباقات المتوفرة - Speed X</h1>
-  </header>
-
-  <main class="main-content">
-    <h2>مرحبًا، <span id="welcome-name"></span></h2>
-
-    <section class="plans-section">
+  <div class="container">
+    <h2>اختر الباقة المناسبة لك</h2>
+    <div class="plans">
       <div class="plan-card">
-        <h3>باقة 30 ميجابت</h3>
-        <p>السرعة: 30 Mbps</p>
-        <p>السعر: 70 شيكل / شهر</p>
-        <ul>
-          <li>مناسبة للاستخدام العادي</li>
-          <li>دعم فني على مدار الساعة</li>
+        <div class="plan-title">الباقة الأساسية</div>
+        <div class="plan-price">₪50 / شهر</div>
+        <ul class="plan-features">
+          <li>سرعة حتى 10 Mbps</li>
+          <li>دعم أساسي</li>
+          <li>بدون عقد</li>
         </ul>
-        <button class="edit-btn">طلب الباقة</button>
+        <button class="select-btn">اشترك الآن</button>
       </div>
 
       <div class="plan-card">
-        <h3>باقة 60 ميجابت</h3>
-        <p>السرعة: 60 Mbps</p>
-        <p>السعر: 100 شيكل / شهر</p>
-        <ul>
-          <li>مناسبة للعائلات والمشاهدة بدقة HD</li>
-          <li>دعم فني على مدار الساعة</li>
+        <div class="plan-title">الباقة المتقدمة</div>
+        <div class="plan-price">₪100 / شهر</div>
+        <ul class="plan-features">
+          <li>سرعة حتى 30 Mbps</li>
+          <li>دعم فني 24/7</li>
+          <li>تجديد تلقائي</li>
         </ul>
-        <button class="edit-btn">طلب الباقة</button>
+        <button class="select-btn">اشترك الآن</button>
       </div>
 
       <div class="plan-card">
-        <h3>باقة 100 ميجابت</h3>
-        <p>السرعة: 100 Mbps</p>
-        <p>السعر: 140 شيكل / شهر</p>
-        <ul>
-          <li>مناسبة للبث والألعاب والعمل عن بعد</li>
-          <li>دعم فني مخصص</li>
+        <div class="plan-title">الباقة الذهبية</div>
+        <div class="plan-price">₪150 / شهر</div>
+        <ul class="plan-features">
+          <li>سرعة حتى 60 Mbps</li>
+          <li>أولوية في الدعم</li>
+          <li>هدية شهر مجاني بعد 6 أشهر</li>
         </ul>
-        <button class="edit-btn">طلب الباقة</button>
+        <button class="select-btn">اشترك الآن</button>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <button id="logout-btn" class="edit-btn">تسجيل الخروج</button>
-  </main>
-
-  <script src="js/logout.js"></script>
 </body>
 </html>
