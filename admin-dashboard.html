@@ -1,1 +1,19 @@
+<button onclick="printUserData()">طباعة بيانات المشترك</button>
 
+<script>
+  function printUserData() {
+    // بيانات المشترك (يمكن الحصول عليها من النموذج أو قاعدة البيانات)
+    const name = "محمد علي";
+    const phone = "0123456789";
+    const location = "الرياض";
+    const plan = "باقة 50GB";
+    const date = "2023-05-15";
+    const price = "50"; // السعر بـ₪
+
+    // بناء الرابط الذي يحتوي على المعلمات
+    const printUrl = `print-user.html?name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&location=${encodeURIComponent(location)}&plan=${encodeURIComponent(plan)}&date=${encodeURIComponent(date)}&price=${encodeURIComponent(price)}`;
+
+    // توجيه المستخدم إلى صفحة الطباعة
+    window.location.href = printUrl;
+  }
+</script>
