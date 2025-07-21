@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>طباعة بيانات مشترك - SpeedX</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: white;
+      color: #000;
+      padding: 40px;
+    }
+
+    .print-container {
+      max-width: 700px;
+      margin: auto;
+      border: 2px solid #444;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    .print-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .print-header img {
+      width: 120px;
+    }
+
+    .print-header h2 {
+      font-size: 28px;
+      color: #1a90ff;
+    }
+
+    table.print-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+    }
+
+    table.print-table th, table.print-table td {
+      border: 1px solid #555;
+      padding: 12px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .stamp {
+      text-align: left;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+
+    .stamp img {
+      width: 100px;
+      opacity: 0.6;
+    }
+
+    @media print {
+      .no-print {
+        display: none;
+      }
+    }
+
+    .no-print {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .no-print a {
+      text-decoration: none;
+      background-color: #1a90ff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body onload="window.print()">
+
+  <div class="print-container">
+    <div class="print-header">
+      <img src="images/logo.png" alt="شعار الشركة" />
+      <h2>SpeedX - بيانات مشترك</h2>
+    </div>
+
+    <table class="print-table">
+      <tr><th>الاسم</th><td id="name"></td></tr>
+      <tr><th>رقم الهاتف</th><td id="phone"></td></tr>
+      <tr><th>الموقع</th><td id="location"></td></tr>
+      <tr><th>الباقة</th><td id="plan"></td></tr>
+      <tr><th>تاريخ الاشتراك</th><td id="date"></td></tr>
+      <tr><th>السعر</th><td id="price"></td></tr>
+    </table>
+
+    <div class="stamp">
+      <p>ختم الشركة:</p>
+      <img src="images/stamp.png" alt="ختم الشركة" />
+    </div>
+  </div>
+
+  <div class="no-print">
+    <a href="users.html">⬅️ الرجوع إلى قائمة المشتركين</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    document.getElementById('name').textContent = params.get('name') || '-';
+    document.getElementById('phone').textContent = params.get('phone') || '-';
+    document.getElementById('location').textContent = params.get('location') || '-';
+    document.getElementById('plan').textContent = params.get('plan') || '-';
+    document.getElementById('date').textContent = params.get('date') || '-';
+    document.getElementById('price').textContent = (params.get('price') || '-') + ' ₪';
+  </script>
+
+</body>
+</html>
