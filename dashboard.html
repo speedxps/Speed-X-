@@ -2,140 +2,67 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>لوحة تحكم - SpeedX</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
-    }
-    body {
-      background-color: #f2f2f2;
-      direction: rtl;
-    }
-    header {
-      background-color: #64be00;
-      color: white;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header .user-info {
-      text-align: right;
-    }
-    header img {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      margin-left: 10px;
-    }
-    .bill-section {
-      background-color: white;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
-    }
-    .bill-section .bill {
-      font-size: 24px;
-      color: #333;
-    }
-    .bill-section .pay-btn {
-      background-color: #64be00;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-    .speed-section {
-      background-color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    .speed-section h2 {
-      font-size: 26px;
-      color: #0072ce;
-    }
-    .quick-links {
-      background-color: white;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      padding: 15px;
-      margin-top: 10px;
-    }
-    .quick-links div {
-      width: 30%;
-      margin: 10px 0;
-      background: #f9f9f9;
-      padding: 10px;
-      text-align: center;
-      border-radius: 10px;
-      font-size: 14px;
-      cursor: pointer;
-      border: 1px solid #ddd;
-    }
-    footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: white;
-      border-top: 1px solid #ddd;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-    }
-    footer button {
-      background: none;
-      border: none;
-      font-size: 14px;
-      color: #333;
-      text-align: center;
-    }
-    footer button.active {
-      color: #64be00;
-      font-weight: bold;
-    }
-  </style>
+  <title>الفواتير - Speed X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <div class="container bills">
+    <h2>💳 فواتيرك الشهرية</h2>
 
-<header>
-  <div class="user-info">
-    <div>☀️ مساء الخير</div>
-    <strong>نور</strong>
+    <!-- زر طباعة الفاتورة الأخيرة -->
+    <button onclick="printLastBill()">🖨️ طباعة فاتورتي الأخيرة</button>
+
+    <table>
+      <thead>
+        <tr>
+          <th>الشهر</th>
+          <th>القيمة</th>
+          <th>الحالة</th>
+        </tr>
+      </thead>
+      <tbody id="billsTableBody">
+        <!-- البيانات ستُضاف هنا -->
+      </tbody>
+    </table>
   </div>
-  <img src="images/user.jpg" alt="User">
-</header>
 
-<section class="bill-section">
-  <div>📄 آخر فاتورة</div>
-  <div class="bill">₪127.6</div>
-  <div style="color: orange;">إجمالي المبالغ غير المسددة: ₪127.6</div>
-  <button class="pay-btn">💳 ادفع فواتيرك</button>
-</section>
+  <script>
+    const user = localStorage.getItem("loggedInUser") || "guest";
 
-<section class="speed-section">
-  <div>السرعة الحالية</div>
-  <h2>100 Mbps</h2>
-  <a href="#" style="color:#0072ce;">← تغيير السرعة</a>
-</section>
+    const sampleBills = [
+      { month: "يونيو 2025", amount: "90 شيكل", status: "مدفوعة" },
+      { month: "مايو 2025", amount: "90 شيكل", status: "غير مدفوعة" },
+      { month: "أبريل 2025", amount: "90 شيكل", status: "مدفوعة" }
+    ];
 
-<section class="quick-links">
-  <div>📄 فواتيرك</div>
-  <div>📱 دليل الهاتف</div>
-  <div>🛠️ تقديم عطل</div>
-  <div>📶 إعدادات الراوتر</div>
-</section>
+    const tbody = document.getElementById("billsTableBody");
+    sampleBills.forEach(bill => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${bill.month}</td>
+        <td>${bill.amount}</td>
+        <td>${bill.status}</td>
+      `;
+      tbody.appendChild(row);
+    });
 
-<footer>
-  <button class="active">🏠 الرئيسية</button>
-  <button>🧰 الخدمات</button>
-  <button>🛒 المتجر</button>
-  <button>⚙️ المزيد</button>
-</footer>
-
+    // دالة طباعة الفاتورة الأخيرة
+    function printLastBill() {
+      const lastBill = sampleBills[0]; // أول عنصر (أحدث فاتورة)
+      const printContent = `
+        <h2>فاتورتي الأخيرة</h2>
+        <p>📅 الشهر: ${lastBill.month}</p>
+        <p>💳 القيمة: ${lastBill.amount}</p>
+        <p>✅ الحالة: ${lastBill.status}</p>
+      `;
+      const printWindow = window.open('', '', 'height=600,width=800');
+      printWindow.document.write('<html><head><title>طباعة فاتورتي</title></head><body>');
+      printWindow.document.write(printContent);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.print();
+    }
+  </script>
 </body>
 </html>
