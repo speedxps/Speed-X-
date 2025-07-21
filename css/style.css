@@ -1,7 +1,7 @@
 /* إعدادات عامة */
 body {
   font-family: 'Cairo', sans-serif;
-  background-color: #f4f6f7;
+  background-color: #f5f7fa;
   color: #333;
   margin: 0;
   padding: 0;
@@ -9,7 +9,7 @@ body {
 }
 
 h2 {
-  color: #4CAF50;
+  color: #ffffff;
   text-align: center;
   margin-top: 20px;
 }
@@ -46,6 +46,7 @@ textarea {
   font-size: 16px;
 }
 
+/* الأزرار */
 button {
   width: 100%;
   background-color: #4CAF50;
@@ -192,8 +193,8 @@ button.small:hover {
 
 .admin-buttons {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px; /* زيادة المسافة بين الأزرار */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 25px;
   margin-top: 20px;
 }
 
