@@ -70,6 +70,7 @@
       border-radius: 15px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       font-size: 14px;
+      cursor: pointer;
     }
     .quick-access .item i {
       display: block;
@@ -87,10 +88,11 @@
       padding: 10px 0;
       border-top: 1px solid #ddd;
     }
-    .bottom-nav div {
+    .bottom-nav a {
       text-align: center;
       font-size: 12px;
       color: #333;
+      text-decoration: none;
     }
     .bottom-nav .active {
       color: #6bc641;
@@ -101,7 +103,8 @@
   <div class="header">
     <div class="top-row">
       <div>
-        <i class="fas fa-bell"></i><span style="background:red; border-radius: 50%; padding:2px 6px; font-size: 12px; margin-right: 5px;">7</span>
+        <i class="fas fa-bell"></i>
+        <span style="background:red; border-radius: 50%; padding:2px 6px; font-size: 12px; margin-right: 5px;">7</span>
         <i class="fas fa-search" style="margin-right: 10px;"></i>
       </div>
       <div>
@@ -119,11 +122,11 @@
         <div style="font-size:24px; font-weight:bold;">₪ 127.6</div>
         <div style="color: #e74c3c; font-size: 13px;">إجمالي المبالغ غير المسددة ₪ 127.6</div>
       </div>
-      <button class="pay-btn">ادفع فواتيرك</button>
+      <button class="pay-btn" onclick="location.href='bill.html'">ادفع فواتيرك</button>
     </div>
     <hr>
     <div>
-      <div style="font-size:14px; margin-bottom: 5px;">السرعة <a href="#" style="color:#007bff">تغيير السرعة</a></div>
+      <div style="font-size:14px; margin-bottom: 5px;">السرعة <a href="plans.html" style="color:#007bff">تغيير السرعة</a></div>
       <div class="speed-box">
         <div>0 دقائق 📞</div>
         <span>100 Mbps</span>
@@ -133,45 +136,45 @@
   </div>
 
   <div class="quick-access">
-    <div class="item">
+    <a href="bill.html" class="item">
       <i class="fas fa-file-invoice"></i>
       فواتيرك
-    </div>
-    <div class="item">
+    </a>
+    <a href="phone.html" class="item">
       <i class="fas fa-phone"></i>
       دليل الهاتف
-    </div>
-    <div class="item">
+    </a>
+    <a href="fault.html" class="item">
       <i class="fas fa-tools"></i>
       طلب تقديم عطل
-    </div>
-    <div class="item">
-      <i class="fas fa-phone-alt"></i>
-      دليل الهاتف
-    </div>
-    <div class="item">
+    </a>
+    <a href="support.html" class="item">
+      <i class="fas fa-headset"></i>
+      الدعم الفني
+    </a>
+    <a href="router.html" class="item">
       <i class="fas fa-wifi"></i>
       إعدادات الراوتر
-    </div>
+    </a>
   </div>
 
   <div class="bottom-nav">
-    <div class="active">
+    <a href="dashboard.html" class="active">
       <i class="fas fa-home"></i><br>
       الرئيسية
-    </div>
-    <div>
+    </a>
+    <a href="plans.html">
       <i class="fas fa-th-large"></i><br>
       الخدمات
-    </div>
-    <div>
+    </a>
+    <a href="store.html">
       <i class="fas fa-store"></i><br>
       المتجر
-    </div>
-    <div>
+    </a>
+    <a href="profile.html">
       <i class="fas fa-cog"></i><br>
       المزيد
-    </div>
+    </a>
   </div>
 </body>
 </html>
