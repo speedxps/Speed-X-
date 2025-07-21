@@ -1,40 +1,89 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>إعدادات الحساب - Speed X</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>إعدادات الراوتر - SpeedX</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 500px;
+      margin: 30px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #6bc641;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    .save-btn {
+      width: 100%;
+      background-color: #6bc641;
+      color: white;
+      padding: 12px;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .save-btn:hover {
+      background-color: #5aaa38;
+    }
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
 </head>
-<body class="dashboard-body">
-  <!-- رأس الصفحة -->
-  <header class="main-header">
-    <h2>إعدادات الحساب</h2>
-  </header>
+<body>
+  <div class="container">
+    <h2><i class="fas fa-wifi"></i> إعدادات الراوتر</h2>
+    <form id="routerForm">
+      <label for="ssid">اسم الشبكة (SSID)</label>
+      <input type="text" id="ssid" value="SpeedX-WiFi" required />
 
-  <!-- المحتوى -->
-  <main class="main-content">
-    <section class="support-section">
-      <div class="support-option">
-        <img src="images/icons/lock.png" alt="Password" class="support-icon">
-        <p>تغيير كلمة المرور</p>
-      </div>
-      <div class="support-option">
-        <img src="images/icons/notifications.png" alt="Notifications" class="support-icon">
-        <p>إعدادات الإشعارات</p>
-      </div>
-      <div class="support-option">
-        <img src="images/icons/theme.png" alt="Theme" class="support-icon">
-        <p>الوضع الليلي</p>
-      </div>
-    </section>
-  </main>
+      <label for="password">كلمة المرور</label>
+      <input type="password" id="password" value="123456789" required />
 
-  <!-- القائمة السفلية -->
-  <footer class="bottom-nav">
-    <button class="nav-btn" onclick="location.href='dashboard.html'">الرئيسية</button>
-    <button class="nav-btn" onclick="location.href='notifications.html'">الإشعارات</button>
-    <button class="nav-btn" onclick="location.href='more.html'">المزيد</button>
-  </footer>
+      <label for="encryption">نوع التشفير</label>
+      <select id="encryption">
+        <option>WPA2</option>
+        <option>WPA3</option>
+        <option>WPA/WPA2 مختلط</option>
+      </select>
+
+      <button type="submit" class="save-btn">💾 حفظ التغييرات</button>
+    </form>
+    <div class="success" id="message"></div>
+  </div>
+
+  <script>
+    document.getElementById('routerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('message').textContent = '✅ تم حفظ الإعدادات بنجاح (شكلية)';
+    });
+  </script>
 </body>
 </html>
