@@ -2,148 +2,140 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <title>لوحة التحكم - Speed X 2025</title>
+  <title>لوحة تحكم - SpeedX</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
   <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
     body {
-      font-family: 'Tahoma', sans-serif;
-      margin: 0;
-      background-color: #f5f8fa;
+      background-color: #f2f2f2;
+      direction: rtl;
     }
-
-    .header {
-      background-color: #4CAF50;
+    header {
+      background-color: #64be00;
       color: white;
-      text-align: center;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .user-info {
+      text-align: right;
+    }
+    header img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-left: 10px;
+    }
+    .bill-section {
+      background-color: white;
       padding: 20px;
-      border-bottom: 4px solid #388E3C;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
     }
-
-    .header .logo {
-      width: 60px;
-      display: block;
-      margin: 0 auto 10px;
+    .bill-section .bill {
+      font-size: 24px;
+      color: #333;
     }
-
-    .header h2 {
-      margin: 0 0 10px;
-    }
-
-    .header button {
-      background-color: #ffffff;
-      color: #4CAF50;
+    .bill-section .pay-btn {
+      background-color: #64be00;
+      color: white;
       border: none;
       padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 8px;
+      border-radius: 20px;
+      margin-top: 10px;
       cursor: pointer;
     }
-
-    .dashboard-main {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      padding: 20px;
-    }
-
-    .card {
-      background-color: #e3f2fd;
+    .speed-section {
+      background-color: white;
       padding: 20px;
       text-align: center;
+    }
+    .speed-section h2 {
+      font-size: 26px;
+      color: #0072ce;
+    }
+    .quick-links {
+      background-color: white;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 15px;
+      margin-top: 10px;
+    }
+    .quick-links div {
+      width: 30%;
+      margin: 10px 0;
+      background: #f9f9f9;
+      padding: 10px;
+      text-align: center;
       border-radius: 10px;
-      font-size: 18px;
-      font-weight: bold;
+      font-size: 14px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      border: 1px solid #ddd;
     }
-
-    .card:hover {
-      background-color: #d0ebff;
-    }
-
-    .card.support-call {
-      background-color: #ff5252;
-      color: white;
-      grid-column: span 2;
-      font-size: 20px;
-    }
-
-    .bottom-nav {
+    footer {
       position: fixed;
       bottom: 0;
       width: 100%;
-      background-color: #ffffff;
-      border-top: 1px solid #ccc;
+      background-color: white;
+      border-top: 1px solid #ddd;
       display: flex;
       justify-content: space-around;
       padding: 10px 0;
     }
-
-    .nav-btn {
-      background-color: transparent;
+    footer button {
+      background: none;
       border: none;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #4CAF50;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
     }
-
-    @media (max-width: 500px) {
-      .dashboard-main {
-        grid-template-columns: 1fr;
-      }
-
-      .card.support-call {
-        font-size: 18px;
-      }
+    footer button.active {
+      color: #64be00;
+      font-weight: bold;
     }
   </style>
 </head>
-<body class="dashboard-body">
-  <header class="header">
-    <img src="images/logo.png" alt="Logo" class="logo">
-    <h2>مرحبًا، <span id="welcome-name">...</span></h2>
-    <button onclick="logout()">🚪 تسجيل الخروج</button>
-  </header>
+<body>
 
-  <main class="dashboard-main">
-    <div class="card" onclick="goTo('profile.html')">👤 الملف الشخصي</div>
-    <div class="card" onclick="goTo('bills.html')">💳 فواتيري</div>
-    <div class="card" onclick="goTo('support.html')">📞 الدعم الفني</div>
-    <div class="card" onclick="goTo('notifications.html')">🔔 الإشعارات</div>
-    <div class="card" onclick="goTo('upgrade.html')">🚀 ترقية السرعة</div>
-    <div class="card" onclick="goTo('relocation.html')">📦 طلب نقل موقع</div>
-    <div class="card" onclick="goTo('router.html')">📡 شراء راوتر</div>
-    <div class="card support-call" onclick="callSupport()">📞 اتصل بالدعم</div>
-  </main>
+<header>
+  <div class="user-info">
+    <div>☀️ مساء الخير</div>
+    <strong>نور</strong>
+  </div>
+  <img src="images/user.jpg" alt="User">
+</header>
 
-  <footer class="bottom-nav">
-    <button class="nav-btn" onclick="goTo('profile.html')">👤 الملف الشخصي</button>
-    <button class="nav-btn" onclick="goTo('bills.html')">💳 فواتيري</button>
-    <button class="nav-btn" onclick="goTo('support.html')">📞 الدعم</button>
-  </footer>
+<section class="bill-section">
+  <div>📄 آخر فاتورة</div>
+  <div class="bill">₪127.6</div>
+  <div style="color: orange;">إجمالي المبالغ غير المسددة: ₪127.6</div>
+  <button class="pay-btn">💳 ادفع فواتيرك</button>
+</section>
 
-  <script>
-    const user = localStorage.getItem("loggedInUser");
-    if (!user) {
-      window.location.href = "index.html";
-    } else {
-      document.getElementById("welcome-name").innerText = user;
-    }
+<section class="speed-section">
+  <div>السرعة الحالية</div>
+  <h2>100 Mbps</h2>
+  <a href="#" style="color:#0072ce;">← تغيير السرعة</a>
+</section>
 
-    function goTo(page) {
-      window.location.href = page;
-    }
+<section class="quick-links">
+  <div>📄 فواتيرك</div>
+  <div>📱 دليل الهاتف</div>
+  <div>🛠️ تقديم عطل</div>
+  <div>📶 إعدادات الراوتر</div>
+</section>
 
-    function logout() {
-      localStorage.removeItem("loggedInUser");
-      window.location.href = "index.html";
-    }
+<footer>
+  <button class="active">🏠 الرئيسية</button>
+  <button>🧰 الخدمات</button>
+  <button>🛒 المتجر</button>
+  <button>⚙️ المزيد</button>
+</footer>
 
-    function callSupport() {
-      window.location.href = "tel:0599123456";
-    }
-  </script>
 </body>
 </html>
